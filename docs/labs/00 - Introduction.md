@@ -52,3 +52,5 @@ When the virtual machine login screen appears, it should be ready to accept the 
 
 ## Next steps
 In this lab you familiarized yourself with the Skillable lab environment, explored the various logins that will be used throughout the labs, and logged into your virtual machine for the first time.
+
+- Select **Next** to continue to **Lab 1 - Getting started**
