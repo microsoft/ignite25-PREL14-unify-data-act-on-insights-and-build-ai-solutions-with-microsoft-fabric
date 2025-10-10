@@ -1,4 +1,27 @@
-![](../assets/images/microsoft-logo.png"/>
+@lab.Title
+
+## Welcome to Your Lab Environment
+
+**Interacting with your lab environment**
+- Text formatted as an +++example+++ represents type text. Clicking on this text will automatically insert it to prevent any typing errors.
+- Text formatted as an ++example++ represents copy text. Clicking on this text will copy it to your clipboard and can then be pasted to prevent any typing errors.
+- Text formatted as an [example](https://www.microsoft.com/en-us/microsoft-fabric/getting-started) is a hyperlink that will open in a new browser tab or window.
+
+**Getting started**
+
+To begin, log into the virtual machine using the following Windows credentials:
+- Username: +++@lab.VirtualMachine(Win11-Pro-Base).Username+++
+- Password: +++@lab.VirtualMachine(Win11-Pro-Base).Password+++
+
+Your Enter ID credentials, shown below, will be on the resources tab for reference throughout the lab:
+- Entra username: +++@lab.CloudPortalCredential(User1).Username+++
+- Entra password +++@lab.CloudPortalCredential(User1).Password+++
+
++++@lab.CloudPortalCredential(User1).TAP+++
++++@lab.CloudPortalCredential(User1).FabricCapacity+++
++++@lab.CloudResourceTemplate(FabricPerUserPOCv3).Parameters[capacityName]+++
+@lab.CtrlAltDelete
+@lab.CloudPortalCredential(User1).AccessToken
 
 # End-to-End Data Engineering: <br> Modern Data Warehousing on Microsoft Fabric
 
