@@ -1,308 +1,174 @@
-![](../assets/images/microsoft-logo.png)
-
-# End-to-End Data Engineering:<br>Modern Data Warehousing on Microsoft Fabric
-
-## Lab 2 - Data warehouse DDL
+# Lab 2 - Lakehouses and Data Engineering with Spark
 
 Before you begin:
 
-- Make sure you have read the overview on the [workshop homepage](<../README.md>).
-- If you have not completed [Lab 1 - Getting started](<01 - Getting started.md>), go complete all the steps then return here to continue.
+- If you have not completed Lab 1 - Getting started, go complete all the steps then return here to continue.
 
 This lab will cover:
 
-- <a href="#2.1">Creating schemas</a>
-- <a href="#2.2">Creating tables</a>
+- Creating a lakehouse
+- Extract, Transform, and Load data with PySpark
+- Querying tables with T-SQL
 
 <hr>
 
-<h3 id = "2.1">2.1 - Creating schemas</h3>
+### 2.1 - Creating a lakehouse
 
-*Note: If you just completed Lab 1 and still have The Workshop notebook open, remain in The Workshop notebook, navigate to **Lab 2 - Data warehouse DDL**, locate the **2.1 - Creating schemas** section, and move straight to step 3 below.*
-
-1. Return to the *Modern Data Warehousing on Microsoft Fabric* workspace created in *Lab 0 - Lab environment setup* by selecting the **workspace icon** from the left navigation bar. 
+1. If necessary, return to the *@lab.CloudResourceTemplate(FabricPerUserPOCv3).Parameters[capacityName]* workspace created in *Lab 1 - Getting started* by selecting the **workspace icon** from the left navigation bar then selecting your workspace name from the flyout. 
 
     *Note: The icons on the navigation bar can be pinned and unpinned. Therefore, the icons you see may differ from the screenshot.*
 
     ![](../assets/images/02_navigation_bar.png)
 
-1. From the item list, select **The Workshop** notebook and navigate to **Lab 2 - Data warehouse DDL**, and locate the **2.1 - Creating schemas** section.
+1. With the empty Fabric workspace open, select **New item** located just below the workspace name.
 
-    ![](../assets/images/02_workspace.png)
+    ![](../assets/images/02_new_item.png)
 
-1. Look to see what schemas already exist by running the cell for **Step 2.1.3** in *The Workshop* notebook. The results should look familiar for those used to working with SQL Server. Notice a schema called *queryinsights* which will be used in *Lab 7 - Data warehouse management*.
+1. From the **All items** view, locate the **Store data** section and select the **Lakehouse** tile.
 
-    ``` sql
-    SELECT * FROM sys.schemas
-    ```
+    ![](../assets/images/02_new_item_list_lakehouse.png)
 
-    ![](../assets/images/02_schemas_before_create.png)
+1. On the **New Lakehouse** dialog box, enter the name **MarketResearch** and select **Create**. 
 
-1. Create a new schema called **stage** by running the cell for **Step 2.1.4** in *The Workshop* notebook. There will be no output after running this cell.
+    ![](../assets/images/02_new_lakehouse.png)
 
-    ``` sql
-    IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'stage')
-    EXEC ('CREATE SCHEMA stage')
-    ```
-    
-1. Validate that the schema was created by running the cell for **Step 2.1.5** in *The Workshop* notebook. 
+    The lakehouse will be created and open to the *Get data in your lakehouse* landing page with a set of links to get started quickly.
 
-    *Note: Your schema_id may be different. This is not a problem, we only need to validate that the *stage* schema is in the result.*
+    ![](../assets/images/02_new_lakehouse_landing_page.png)
 
-    ``` sql
-    SELECT * FROM sys.schemas WHERE name = 'stage'
-    ```
+### 2.2 - Extract, Transform, and Load data with PySpark
 
-    ![](../assets/images/02_schemas_after_create.png)
+1. From the **Home** tab of the ribbon, select **Open notebook -> New notebook**. An empty notebook with the default name of *Notebook 1* will be created and open.
 
-<h3 id = "2.2">2.2 - Creating tables</h3>
+    ![](../assets/images/02_new_notebook.png)
 
-Before beginning, open *The Workshop* notebook, navigate to **Lab 2 - Data warehouse basics**, and locate the **2.2 - Creating tables** section.
+1. From the **Home** tab of the ribbon, select the **gear** icon (Settings) to open the notebook settings. On the **About** page, perform the following actions:
+    - Change the **Name** to **Prepare Market Research**.
+    - Optionally, add a **Description** such as **Notebook handling all data engineering related tasks for the internet sales market research analysis.**.
+    - Select the **X** in the top right corner of the notebook settings to return to the notebook editor.
 
-1. Create the stage tables, making sure to first drop any tables that may already exist, by running the cell for **Step 2.2.1** in *The Workshop* notebook. Upon completion, the cell will have a messages output but no query results.
-    - stage.DimCity
-    - stage.DimCustomer
-    - stage.DimEmployee
-    - stage.DimStockItem
-    - stage.FactSale
+    ![](../assets/images/02_notebook_settings.png)
 
-    ``` sql
-    DROP TABLE IF EXISTS stage.DimCity
-    DROP TABLE IF EXISTS stage.DimCustomer
-    DROP TABLE IF EXISTS stage.DimEmployee
-    DROP TABLE IF EXISTS stage.DimStockItem
-    DROP TABLE IF EXISTS stage.FactSale
-    GO
+1. The *Reasons.parquet* file contains a list of options for what may have influenced a customer's decision to make a purchase. The *SalesReason.parquet* file contains a record for each line item purchased and the ID for the corresponding reason that influenced the purchase. Read each file into a dataframe and preview the data by performing the following actions:
+    - Replace the text in the first notebook cell with the following code:
+        ```python
+        df_salesreason = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/SalesReason.parquet")
+        df_reasons = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/Reasons.parquet")
+        df_salesreason.show()
+        df_reasons.show()
+        ```
+    - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the first code cell in focus to run the code.
+    - Review both datasets.
 
-    CREATE TABLE [stage].[DimCity]
-        (
-            [CityKey]                   [int]            NOT NULL,
-            [City]                      [varchar](50)    NOT NULL,
-            [StateProvince]             [varchar](50)    NOT NULL,
-            [Country]                   [varchar](60)    NOT NULL,
-            [Continent]                 [varchar](30)    NOT NULL,
-            [SalesTerritory]            [varchar](50)    NOT NULL,
-            [Region]                    [varchar](30)    NOT NULL,
-            [Subregion]                 [varchar](30)    NOT NULL,
-            [Location]                  [varchar](50)    NULL,
-            [LatestRecordedPopulation]  [bigint]         NOT NULL
-        )
-    GO
+    ![](../assets/images/02_run_cell_01.png)
 
-    CREATE TABLE [stage].[DimCustomer]
-        (
-            [CustomerKey]               [int]            NOT NULL,
-            [Customer]                  [varchar](100)   NOT NULL,
-            [BillToCustomer]            [varchar](100)   NOT NULL,
-            [Category]                  [varchar](50)    NOT NULL,
-            [BuyingGroup]               [varchar](50)    NOT NULL,
-            [PrimaryContact]            [varchar](50)    NOT NULL,
-            [PostalCode]                [varchar](10)    NOT NULL
-        )
-    GO
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
 
-    CREATE TABLE [stage].[DimEmployee]
-        (
-            [EmployeeKey]               [int]            NOT NULL,
-            [Employee]                  [varchar](50)    NOT NULL,
-            [PreferredName]             [varchar](50)    NOT NULL,
-            [IsSalesperson]             [bit]            NOT NULL
-        )
-    GO
+    ![](../assets/images/02_new_cell.png)
 
-    CREATE TABLE [stage].[DimStockItem]
-        (
-            [StockItemKey]              [int]            NOT NULL,
-            [StockItem]                 [varchar](100)   NOT NULL,
-            [Color]                     [varchar](20)    NOT NULL,
-            [SellingPackage]            [varchar](50)    NOT NULL,
-            [BuyingPackage]             [varchar](50)    NOT NULL,
-            [Brand]                     [varchar](50)    NOT NULL,
-            [Size]                      [varchar](20)    NOT NULL,
-            [LeadTimeDays]              [int]            NOT NULL,
-            [QuantityPerOuter]          [int]            NOT NULL,
-            [IsChillerStock]            [bit]            NOT NULL,
-            [Barcode]                   [varchar](50)    NULL,
-            [TaxRate]                   [decimal](18, 3) NOT NULL,
-            [UnitPrice]                 [decimal](18, 2) NOT NULL,
-            [RecommendedRetailPrice]    [decimal](18, 2) NULL,
-            [TypicalWeightPerUnit]      [decimal](18, 3) NOT NULL
-        )
-    GO
+1. In the blank code cell:
+    - Enter the code below which:
+        - Joins the **df_salesreason** and **df_reason** dataframes together to form the **df_marketinganalysis** dataframe using a left outer join.
+        - Drops the SalesReasonID field from the dataset. 
+        - Shows the df_marketinganalysis dataframe for validation. 
 
-    CREATE TABLE [stage].[FactSale]
-        (
-            [CityKey]                   [int]            NOT NULL,
-            [CustomerKey]               [int]            NOT NULL,
-            [BillToCustomerKey]         [int]            NOT NULL,
-            [StockItemKey]              [int]            NOT NULL,
-            [InvoiceDateKey]            [date]           NOT NULL,
-            [DeliveryDateKey]           [date]           NULL,
-            [SalespersonKey]            [int]            NOT NULL,
-            [WWIInvoiceID]              [int]            NOT NULL,
-            [Description]               [varchar](100)   NOT NULL,
-            [Package]                   [varchar](50)    NOT NULL,
-            [Quantity]                  [int]            NOT NULL,
-            [UnitPrice]                 [decimal](18, 2) NOT NULL,
-            [TaxRate]                   [decimal](18, 3) NOT NULL,
-            [TotalExcludingTax]         [decimal](18, 2) NOT NULL,
-            [TaxAmount]                 [decimal](18, 2) NOT NULL,
-            [Profit]                    [decimal](18, 2) NOT NULL,
-            [TotalIncludingTax]         [decimal](18, 2) NOT NULL,
-            [TotalDryItems]             [int]            NOT NULL,
-            [TotalChillerItems]         [int]            NOT NULL
-        )
-    GO
-    ```
+        ```python
+        df_marketinganalysis = df_salesreason.join(df_reasons, "SalesReasonID", "leftouter").drop("SalesReasonID")
+        df_marketinganalysis.show()
+        ```
+    - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
+    - Review the dataset.
 
-1. Create the dimensional model tables, making sure to first drop any tables that may already exist, by running the cell for **Step 2.2.2** in *The Workshop* notebook. Upon completion, the cell will have a messages output but no query results.
-    - dbo.DimCity
-    - dbo.DimCustomer
-    - dbo.DimDate
-    - dbo.DimEmployee
-    - dbo.DimStockItem
-    - dbo.FactSale
+    ![](../assets/images/02_dataframe_joined.png)
 
-    ``` sql
-    DROP TABLE IF EXISTS dbo.DimCity
-    DROP TABLE IF EXISTS dbo.DimCustomer
-    DROP TABLE IF EXISTS dbo.DimDate
-    DROP TABLE IF EXISTS dbo.DimEmployee
-    DROP TABLE IF EXISTS dbo.DimStockItem
-    DROP TABLE IF EXISTS dbo.FactSale
-    GO
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
 
-    CREATE TABLE [dbo].[DimCity]
-        (
-            [CitySK]                    [int]            NOT NULL,
-            [CityAK]                    [int]            NOT NULL,
-            [City]                      [varchar](50)    NOT NULL,
-            [StateProvince]             [varchar](50)    NOT NULL,
-            [Country]                   [varchar](60)    NOT NULL,
-            [Continent]                 [varchar](30)    NOT NULL,
-            [SalesTerritory]            [varchar](50)    NOT NULL,
-            [Region]                    [varchar](30)    NOT NULL,
-            [Subregion]                 [varchar](30)    NOT NULL,
-            [Location]                  [varchar](50)    NULL,
-            [LatestRecordedPopulation]  [bigint]         NOT NULL
-        )
-    GO
+1. In the blank code cell:
+    - Enter the code below which writes the dataframe to a Delta table.
 
-    CREATE TABLE [dbo].[DimCustomer]
-        (
-            [CustomerSK]                [int]            NOT NULL,
-            [CustomerAK]                [int]            NOT NULL,
-            [Customer]                  [varchar](100)   NOT NULL,
-            [BillToCustomer]            [varchar](100)   NOT NULL,
-            [Category]                  [varchar](50)    NOT NULL,
-            [BuyingGroup]               [varchar](50)    NOT NULL,
-            [PrimaryContact]            [varchar](50)    NOT NULL,
-            [PostalCode]                [varchar](10)    NOT NULL
-        )
-    GO
+        ```python
+        df_marketinganalysis = df_salesreason.join(df_reasons, "SalesReasonID", "leftouter").drop("SalesReasonID")
+        df_marketinganalysis.show()
+        ```
 
-    CREATE TABLE [dbo].[DimDate]
-        (
-            [Date]                      [date]           NOT NULL,
-            [DayNumber]                 [int]            NOT NULL,
-            [Day]                       [varchar](10)    NOT NULL,
-            [Month]                     [varchar](10)    NOT NULL,
-            [ShortMonth]                [varchar](3)     NOT NULL,
-            [CalendarMonthNumber]       [int]            NOT NULL,
-            [CalendarMonthLabel]        [varchar](20)    NOT NULL,
-            [CalendarYear]              [int]            NOT NULL,
-            [CalendarYearLabel]         [varchar](10)    NOT NULL,
-            [FiscalMonthNumber]         [int]            NOT NULL,
-            [FiscalMonthLabel]          [varchar](20)    NOT NULL,
-            [FiscalYear]                [int]            NOT NULL,
-            [FiscalYearLabel]           [varchar](10)    NOT NULL,
-            [ISOWeekNumber]             [int]            NOT NULL
-        )
-    GO
+    - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
+    - There will be no output from the cell upon successful completion.
 
-    CREATE TABLE [dbo].[DimEmployee]
-        (
-            [EmployeeSK]                [int]            NOT NULL,
-            [EmployeeAK]                [int]            NOT NULL,
-            [Employee]                  [varchar](50)    NOT NULL,
-            [PreferredName]             [varchar](50)    NOT NULL,
-            [IsSalesperson]             [bit]            NOT NULL
-        )
-    GO
+    ![](../assets/images/02_save_as_delta_table.png)
 
-    CREATE TABLE [dbo].[DimStockItem]
-        (
-            [StockItemSK]               [int]            NOT NULL,
-            [StockItemAK]               [int]            NOT NULL,
-            [StockItem]                 [varchar](100)   NOT NULL,
-            [Color]                     [varchar](20)    NOT NULL,
-            [SellingPackage]            [varchar](50)    NOT NULL,
-            [BuyingPackage]             [varchar](50)    NOT NULL,
-            [Brand]                     [varchar](50)    NOT NULL,
-            [Size]                      [varchar](20)    NOT NULL,
-            [LeadTimeDays]              [int]            NOT NULL,
-            [QuantityPerOuter]          [int]            NOT NULL,
-            [IsChillerStock]            [bit]            NOT NULL,
-            [Barcode]                   [varchar](50)    NULL,
-            [TaxRate]                   [decimal](18, 3) NOT NULL,
-            [UnitPrice]                 [decimal](18, 2) NOT NULL,
-            [RecommendedRetailPrice]    [decimal](18, 2) NULL,
-            [TypicalWeightPerUnit]      [decimal](18, 3) NOT NULL
-        )
-    GO
+1. In the **Explorer**, expand **MarketResearch** -> **Tables** and select the ellipsis (**...**) next to **dbo**. From the menu, select **Refresh**. Validate that the **marketinganalysis** table appears in the list. 
 
-    CREATE TABLE [dbo].[FactSale]
-        (
-            [SaleKey]                   [bigint]         NOT NULL,
-            [CitySK]                    [int]            NOT NULL,
-            [CustomerSK]                [int]            NOT NULL,
-            [BillToCustomerSK]          [int]            NOT NULL,
-            [StockItemSK]               [int]            NOT NULL,
-            [InvoiceDateKey]            [date]           NOT NULL,
-            [DeliveryDateKey]           [date]           NULL,
-            [SalespersonSK]             [int]            NOT NULL,
-            [InvoiceID]                 [int]            NOT NULL,
-            [Description]               [varchar](100)   NOT NULL,
-            [Package]                   [varchar](50)    NOT NULL,
-            [Quantity]                  [int]            NOT NULL,
-            [UnitPrice]                 [decimal](18, 2) NOT NULL,
-            [TaxRate]                   [decimal](18, 3) NOT NULL,
-            [TotalExcludingTax]         [decimal](18, 2) NOT NULL,
-            [TaxAmount]                 [decimal](18, 2) NOT NULL,
-            [Profit]                    [decimal](18, 2) NOT NULL,
-            [TotalIncludingTax]         [decimal](18, 2) NOT NULL,
-            [TotalDryItems]             [int]            NOT NULL,
-            [TotalChillerItems]         [int]            NOT NULL
-        )
-    GO
-    ```
+    ![](../assets/images/02_delta_table_created.png)
 
-1. Validate that the tables were all created by running the cell for **Step 2.2.3** in *The Workshop* notebook and comparing to the output shown below.
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
 
-    ``` sql
-    SELECT
-        SCHEMA_NAME(schema_id) AS SchemaName,
-        name AS TableName
-    FROM sys.tables
-    WHERE
-        SCHEMA_NAME(schema_id) IN ('dbo', 'stage')
-    ORDER BY
-        SchemaName,
-        TableName
-    ```
+1. In the blank code cell:
+    - Enter the code below which uses Spark SQL to read from the Delta table created in a previous step.
 
-    ![](../assets/images/02_tables_validation.png)
+        ```sql
+        %%sql
+        SELECT * FROM marketinganalysis LIMIT 10
+        ```
+
+    - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
+
+    - Review the results and compare them to the dataframe output from the previous steps.
+
+    ![](../assets/images/02_spark_sql_results.png)
+
+### 2.3 - Querying tables with T-SQL
+
+1. From the **Home** tab of the ribbon, open the *Language* dropdown by selecting the down arrow next to **PySpark (Python)**. From the menu, select **T-SQL** from the *T-SQL Analytics*.
+
+    ![](../assets/images/02_language_selection_tsql.png)
+
+1. If there is an active Spark session, you will be prompted to stop the session. Select **Continue**. If no Spark session is active, the language change will take effect immediately without any prompts.
+
+    ![](../assets/images/02_change_language_stop_session.png)
+
+1. In the **Explorer**, select the **Add** button. 
+
+    ![](../assets/images/02_add_warehouse.png)
+
+1. On the warehouse selection page, check the box next to the **MarketResearch** item. The *Type* will be listed as *SQL analytics endpoint*. Select **Confirm**.
+
+    ![](../assets/images/02_select_sql_endpoint.png)
+
+1. In the **Explorer**, select the ellipsis (**...**) next to the **MarketResearch** SQL analytics endpoint. From the menu, select **Refresh**.
+
+    ![](../assets/images/02_refresh_sql_endpoint.png)
+
+1. In the **Explorer**, expand **MarketResearch** -> **Schemas** -> **dbo** -> **Tables** and verify the **marketinganalysis** table exists. 
+
+    ![](../assets/images/02_explorer_sql_endpoint_table.png)
+
+1. In the notebook, scroll past the Spark SQL output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. Notice this time, the cell language is **T-SQL**. 
+
+    ![](../assets/images/02_new_cell_tsql.png)
+
+1. In the blank code cell:
+    - Enter the code below which uses T-SQL to read from the Delta table created in a previous step. This time, the query is running using the SQL engine with the SQL analytics endpoint rather than using the Spark engine with Spark SQL.
+
+        ```sql
+        SELECT TOP 10 * FROM marketinganalysis
+        ```
+
+    - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
+
+    - Review the results and compare them to the Spark SQL output from the previous cell.
+
+    ![](../assets/images/02_tsql_results.png)
 
 
 ## Next steps
-In this lab you created a new schema, stage, to hold all the raw data before it is transformed into the dimensional model. You also created all the stage tables in the stage schema (medallion bronze layer), and tables which will be used for the dimensional model (medallion silver layer).
+In this lab you created a new lakehouse, extracted data from multiple Parquet files, transformed the data, and write it to a Delta in the lakehouse using PySpark. Then, you connected to the lakehouse's SQL analytics endpoint to run a T-SQL query similar to what an analyst may do and how Fabric data agents will interact with the lakehouse. 
 
-- Continue to [Lab 3 - Loading Data](<03 - Loading data.md>)
-- Return to the [workshop homepage](<../README.md>)
+- Select **Next** to continue to **Lab 3 - Dimensional Modeling with Data Warehouse**
+- Select **Previous** to return to **Lab 1 - Getting started**
 
 ## Additional Resources
-- [Tables in data warehousing in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/tables)
-- [Data types in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-types)
-- [Primary keys, foreign keys, and unique keys in Warehouse in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/table-constraints)
-- [Dimensional modeling in Microsoft Fabric Warehouse: Dimension tables](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-dimension-tables)
-- [Dimensional modeling in Microsoft Fabric Warehouse: Fact tables](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-fact-tables)
+- [What is a lakehouse in Microsoft Fabric?](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)
+- [Lakehouse and Delta Lake tables](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables)
+- [Develop, execute, and manage Microsoft Fabric notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook)
+- [How to use Microsoft Fabric notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)
+- [Use a notebook to load data into your lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-load-data)

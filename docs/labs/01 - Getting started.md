@@ -9,7 +9,7 @@ This lab will cover:
 
 ### 1.1 - Logging into Microsoft Fabric
 
-1. Open your web browser and sign in to +++https://fabric.microsoft.com+++.
+1. Open your web browser and navigate to +++https://fabric.microsoft.com+++.
 
 1. In the **Email** box, enter **+++@lab.CloudPortalCredential(User1).Username+++**. Select **Submit**.
 
