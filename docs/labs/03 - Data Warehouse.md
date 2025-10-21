@@ -81,6 +81,9 @@ This lab will cover:
                 [NumberCarsOwned]       [smallint],
                 [AddressLine1]          [varchar](120),
                 [AddressLine2]          [varchar](120),
+                [City]                  [varchar](120),
+                [StateProvinceName]     [varchar](120),
+                [CountryRegionName]     [varchar](120),
                 [Phone]                 [varchar](20),
                 [DateFirstPurchase]     [date],
                 [CommuteDistance]       [varchar](15)
@@ -219,6 +222,9 @@ This lab will cover:
                 [NumberCarsOwned]       [smallint] NULL,
                 [AddressLine1]          [varchar](120) NULL,
                 [AddressLine2]          [varchar](120) NULL,
+                [City]                  [varchar](120) NULL,
+                [StateProvinceName]     [varchar](120) NULL,
+                [CountryRegionName]     [varchar](120) NULL,
                 [Phone]                 [varchar](20) NULL,
                 [DateFirstPurchase]     [date] NULL,
                 [CommuteDistance]       [varchar](15) NULL
@@ -361,6 +367,9 @@ This lab will cover:
             destination.NumberCarsOwned = source.NumberCarsOwned, 
             destination.AddressLine1 = source.AddressLine1, 
             destination.AddressLine2 = source.AddressLine2, 
+            destination.City = source.City, 
+            destination.StateProvinceName = source.StateProvinceName, 
+            destination.CountryRegionName = source.CountryRegionName, 
             destination.Phone = source.Phone, 
             destination.DateFirstPurchase = source.DateFirstPurchase, 
             destination.CommuteDistance = source.CommuteDistance
@@ -390,6 +399,9 @@ This lab will cover:
             NumberCarsOwned,
             AddressLine1,
             AddressLine2,
+            City,
+            StateProvinceName,
+            CountryRegionName,
             Phone,
             DateFirstPurchase,
             CommuteDistance

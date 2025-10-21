@@ -1,375 +1,355 @@
-![](../assets/images/microsoft-logo.png)
-
-# End-to-End Data Engineering:<br>Modern Data Warehousing on Microsoft Fabric
-
-## Lab 4 - Data transformation using T-SQL
+# Lab 4 - Conversational AI with Fabric Data Agents
 
 Before you begin:
 
-- Make sure you have read the overview on the [workshop homepage](<../README.md>).
-- If you have not completed [Lab 3 - Load data](<03 - Loading data.md>), go complete all the steps then return here to continue.
+- If you have not completed Lab 3 - Dimensional Modeling with Data Warehouse, go complete all the steps then return here to continue.
 
 This lab will cover:
 
-- <a href="#4.1">Stored procedures</a>
-- <a href="#4.2">Incrementally updating tables</a>
+- Creating a data agent
+- Addiing data sources to a data agent
+- Configuring the data agent
+- Interacting with the data agent
+- Advanced agent instructions
+- Publishing the data agent
 
 <hr>
 
-<h3 id = "4.1">4.1 - Stored procedures</h3>
+### 4.1 - Creating a data agent
 
-*Note: If you just completed Lab 3 and still have The Workshop notebook open, remain in The Workshop notebook, navigate to **Lab 4 - Data transformation using T-SQL**, locate the **4.1 - Stored procedures** section, and move straight to step 3 below.*
-
-1. Return to the *Modern Data Warehousing on Microsoft Fabric* workspace created in *Lab 0 - Lab environment setup* by selecting the **workspace icon** from the left navigation bar. 
+1. If necessary, return to the *@lab.CloudResourceTemplate(FabricPerUserPOCv3).Parameters[capacityName]* workspace created in *Lab 1 - Getting started* by selecting the **workspace icon** from the left navigation bar then selecting your workspace name from the flyout. 
 
     *Note: The icons on the navigation bar can be pinned and unpinned. Therefore, the icons you see may differ from the screenshot.*
 
     ![](../assets/images/04_navigation_bar.png)
 
-1. From the item list, select **The Workshop** notebook and navigate to **Lab 4 - Data transformation using T-SQL**, and locate the **4.1 - Stored procedures** section.
+1. With the Fabric workspace open, select **New item** located just below the workspace name.
 
-    ![](../assets/images/04_workspace.png)
+    ![](../assets/images/04_new_item.png)
 
-1. Create the stored procedure to generate the unknown member for each dimension table if it does not exist by running the cell for **Step 4.1.3** in *The Workshop* notebook. Upon completion, the cell will have a message output but no query results.
+1. From the **All items** view, locate the **Analyze and train data** section and select the **Data agent (preview)** tile.
 
-    ``` sql
-    DROP PROCEDURE IF EXISTS dbo.CreateUnknownMembers
-    GO
+    ![](../assets/images/04_new_item_list_data_agent.png)
 
-    CREATE PROCEDURE dbo.CreateUnknownMembers
-    AS
-    BEGIN
+1. On the **Create data agent** dialog box, enter the name **Sales Analysis Agent** and select **Create**. 
 
-        IF NOT EXISTS (SELECT * FROM dbo.DimCity WHERE CitySK = 0)
-        INSERT INTO dbo.DimCity SELECT 0, 0, 'Unknown', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', NULL, 0
+    ![](../assets/images/04_new_data_agent.png)
 
-        IF NOT EXISTS (SELECT * FROM dbo.DimCustomer WHERE CustomerSK = 0)
-        INSERT INTO dbo.DimCustomer SELECT 0, 0, 'Unknown', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'
+    The data agent will be created and open to the *Set up your data agent* landing page with a set of instructions to get started quickly.
 
-        IF NOT EXISTS (SELECT * FROM dbo.DimEmployee WHERE EmployeeSK = 0)
-        INSERT INTO dbo.DimEmployee SELECT 0, 0, 'Unknown', 'N/A', 0
+    ![](../assets/images/04_new_data_agent_landing_page.png)
 
-        IF NOT EXISTS (SELECT * FROM dbo.DimStockItem WHERE StockItemSK = 0)
-        INSERT INTO dbo.DimStockItem SELECT 0, 0, 'Unknown', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 0, 0, 0, 'N/A', 0, 0, 0, 0
+### 4.2 - Addiing data sources to a data agent
 
-    END
-    GO 
+1. In the **Explorer**, select **+ Data source** to add a new data source to the agent. 
+
+    ![](../assets/images/04_add_data_source_01.png)
+
+1. On the **Add a data source** page, select the **Sales** warehouse from the item list then select **Add**.
+
+    ![](../assets/images/04_add_data_source_warehouse.png)
+
+1. In the **Explorer**, select the check box next to the following tables in the Sales data warehouse:
+
+    - dbo.DimCustomer
+    - dbo.DimDate
+    - dbo.DimProduct
+    - dbo.FactSales
+
+    ![](../assets/images/04_add_data_warehouse_tables.png)
+
+1. In the **Explorer**, select **+ Data source** to add a new data source to the agent. 
+
+    ![](../assets/images/04_add_data_source_02.png)
+
+1. On the **Add a data source** page, select the **MarketResearch** Lakehouse from the item list then select **Add**.
+
+    ![](../assets/images/04_add_data_source_lakehouse.png)
+
+1. In the **Explorer**, select the check box next to the **marketinganalysis** table in the MarketResearch lakehouse.
+
+    ![](../assets/images/04_add_lakehouse_tables.png)
+
+### 4.3 - Configuring the data agent
+
+1. From the **Home** tab of the ribbon, select **Agent instructions**.
+
+    ![](../assets/images/04_open_agent_instructions.png)
+
+1. In the **Agent instructions** replace the placeholder text with the following markdown to help the agent route questions to the appropriate data source then click anywhere outside the text box to apply the changes:
+
+    ```markdown
+    ## Data Sources
+    When asked about **sales**, use the ```Sales``` warehouse.  
+    When asked about **marketing** or **market research**, use the ```MarketResearch``` lakehouse.  
     ```
 
-    ![](../assets/images/04_stored_procedure_unknown_member.png)
+    ![](../assets/images/04_agent_instructions_01.png)
 
-1. Create the stored procedures to perform an UPSERT or MERGE operation on the dimensional model tables by running the cell for **Step 4.1.4** in *The Workshop* notebook. Upon completion, the cell will have a messages output but no query results.
+1. Perform the following steps to add instructions for the Sales warehouse:
+    - In the **Explorer**, select **Setup**.
+    - Under the **Sales** warehouse, select **Data source instructions**.
+    - In the **Data source instructions**, replace the placeholder text with the following markdown to help the agent better understand context for the Sales warehouse queries:
+    ```markdown
+    The category "Accessories" is also commonly referred to as "Bike Accessories". Always use "Accessories".
 
-    ``` sql
-    -- dbo.UpdateDimCity stored procedure
-    DROP PROCEDURE IF EXISTS dbo.UpdateDimCity
-    GO
-
-
-    CREATE PROCEDURE dbo.UpdateDimCity
-    AS
-    BEGIN
-
-        UPDATE destination
-        SET
-            destination.[CityAK] 				    = source.[CityKey],
-            destination.[City] 						= source.[City],
-            destination.[StateProvince] 			= source.[StateProvince],
-            destination.[Country] 					= source.[Country],
-            destination.[Continent] 				= source.[Continent],
-            destination.[SalesTerritory] 			= source.[SalesTerritory],
-            destination.[Region] 					= source.[Region],
-            destination.[Subregion] 				= source.[Subregion],
-            destination.[Location] 					= source.[Location],
-            destination.[LatestRecordedPopulation] 	= source.[LatestRecordedPopulation]
-        FROM dbo.DimCity AS destination
-        INNER JOIN stage.DimCity AS source
-            ON destination.[CityAK] = source.[CityKey]
-
-        DECLARE @MaxID BIGINT = (SELECT ISNULL(MAX(CitySK), 0) FROM dbo.DimCity)
-
-        INSERT INTO dbo.DimCity
-        SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [CitySK],
-            [CityKey],
-            [City],
-            [StateProvince],
-            [Country],
-            [Continent],
-            [SalesTerritory],
-            [Region],
-            [Subregion],
-            [Location],
-            [LatestRecordedPopulation]
-        FROM stage.DimCity
-        WHERE CityKey NOT IN (SELECT CityAK FROM dbo.DimCity)
-
-    END
-    GO
-
-
-    -- dbo.UpdateDimCustomer stored procedure
-    DROP PROCEDURE IF EXISTS dbo.UpdateDimCustomer
-    GO
-
-    CREATE PROCEDURE dbo.UpdateDimCustomer
-    AS
-    BEGIN
-
-        UPDATE destination
-        SET
-            destination.[CustomerAK] 	    = source.[CustomerKey],
-            destination.[Customer] 			= source.[Customer],
-            destination.[BillToCustomer] 	= source.[BillToCustomer],
-            destination.[Category] 			= source.[Category],
-            destination.[BuyingGroup] 		= source.[BuyingGroup],
-            destination.[PrimaryContact] 	= source.[PrimaryContact],
-            destination.[PostalCode] 		= source.[PostalCode]
-        FROM dbo.DimCustomer AS destination
-        INNER JOIN stage.DimCustomer AS source
-            ON destination.[CustomerAK] = source.[CustomerKey]
-
-        DECLARE @MaxID BIGINT = (SELECT ISNULL(MAX(CustomerSK), 0) FROM dbo.DimCustomer)
-
-        INSERT INTO dbo.DimCustomer
-        SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [CustomerSK],
-            [CustomerKey],
-            [Customer],
-            [BillToCustomer],
-            [Category],
-            [BuyingGroup],
-            [PrimaryContact],
-            [PostalCode]		
-        FROM stage.DimCustomer
-        WHERE CustomerKey NOT IN (SELECT CustomerAK FROM dbo.DimCustomer)
-
-    END
-    GO
-
-
-    -- dbo.UpdateDimEmployee stored procedure
-    DROP PROCEDURE IF EXISTS dbo.UpdateDimEmployee
-    GO
-
-    CREATE PROCEDURE dbo.UpdateDimEmployee
-    AS
-    BEGIN
-
-        UPDATE destination
-        SET
-            destination.[EmployeeAK] 	    = source.[EmployeeKey],
-            destination.[Employee] 			= source.[Employee],
-            destination.[PreferredName] 	= source.[PreferredName],
-            destination.[IsSalesperson]		= source.[IsSalesperson]
-        FROM dbo.DimEmployee AS destination
-        INNER JOIN stage.DimEmployee AS source
-            ON destination.[EmployeeAK] = source.[EmployeeKey]
-
-        DECLARE @MaxID BIGINT = (SELECT ISNULL(MAX(EmployeeSK), 0) FROM dbo.DimEmployee)
-
-        INSERT INTO dbo.DimEmployee
-        SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [EmployeeSK],
-            [EmployeeKey],
-            [Employee],
-            [PreferredName],
-            [IsSalesperson]		
-        FROM stage.DimEmployee
-        WHERE EmployeeKey NOT IN (SELECT EmployeeAK FROM dbo.DimEmployee)
-
-    END
-    GO
-
-
-    -- dbo.UpdateDimStockItem stored procedure
-    DROP PROCEDURE IF EXISTS dbo.UpdateDimStockItem
-    GO
-
-    CREATE PROCEDURE dbo.UpdateDimStockItem
-    AS
-    BEGIN
-
-        UPDATE destination
-        SET
-            destination.[StockItemAK] 			    = source.[StockItemKey],
-            destination.[StockItem] 				= source.[StockItem],
-            destination.[Color] 					= source.[Color],
-            destination.[SellingPackage] 			= source.[SellingPackage],
-            destination.[BuyingPackage] 			= source.[BuyingPackage],
-            destination.[Brand] 					= source.[Brand],
-            destination.[Size] 						= source.[Size],
-            destination.[LeadTimeDays] 				= source.[LeadTimeDays],
-            destination.[QuantityPerOuter] 			= source.[QuantityPerOuter],
-            destination.[IsChillerStock] 			= source.[IsChillerStock],
-            destination.[Barcode] 					= source.[Barcode],
-            destination.[TaxRate] 					= source.[TaxRate],
-            destination.[UnitPrice] 				= source.[UnitPrice],
-            destination.[RecommendedRetailPrice] 	= source.[RecommendedRetailPrice],
-            destination.[TypicalWeightPerUnit] 		= source.[TypicalWeightPerUnit]
-        FROM dbo.DimStockItem AS destination
-        INNER JOIN stage.DimStockItem AS source
-            ON destination.[StockItemAK] = source.[StockItemKey]
-
-        DECLARE @MaxID BIGINT = (SELECT ISNULL(MAX(StockItemSK), 0) FROM dbo.DimStockItem)
-
-        INSERT INTO dbo.DimStockItem
-        SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [StockItemSK],
-            [StockItemKey],
-            [StockItem],
-            [Color],
-            [SellingPackage],
-            [BuyingPackage],
-            [Brand],
-            [Size],
-            [LeadTimeDays],
-            [QuantityPerOuter],
-            [IsChillerStock],
-            [Barcode],
-            [TaxRate],
-            [UnitPrice],
-            [RecommendedRetailPrice],
-            [TypicalWeightPerUnit]
-        FROM stage.DimStockItem
-        WHERE StockItemKey NOT IN (SELECT StockItemAK FROM dbo.DimStockItem)
-
-    END
-    GO
-
-
-    -- dbo.UpdateFactSale stored procedure
-    DROP PROCEDURE IF EXISTS dbo.UpdateFactSale
-    GO
-
-    CREATE PROCEDURE dbo.UpdateFactSale
-    AS
-    BEGIN
-
-        DECLARE @MaxID BIGINT = (SELECT ISNULL(MAX(SaleKey), 0) FROM dbo.FactSale)
-
-        INSERT INTO dbo.FactSale
-        SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [SaleKey],
-            ISNULL(dci.CitySK, 0) AS CityKey,
-            ISNULL(dcu.CustomerSK, 0) AS CustomerKey,
-            ISNULL(dbtc.CustomerSK, 0) AS BillToCustomerKey,
-            ISNULL(dsi.StockItemSK, 0) AS StockItemKey,
-            fs.InvoiceDateKey,
-            fs.DeliveryDateKey,
-            ISNULL(de.EmployeeSK, 0) AS SalespersonKey,
-            fs.WWIInvoiceID,
-            fs.[Description],
-            fs.Package,
-            fs.Quantity,
-            fs.UnitPrice,
-            fs.TaxRate,
-            fs.TotalExcludingTax,
-            fs.TaxAmount,
-            fs.Profit,
-            fs.TotalIncludingTax,
-            fs.TotalDryItems,
-            fs.TotalChillerItems
-        FROM stage.FactSale AS fs
-        LEFT JOIN dbo.DimCity AS dci
-            ON fs.CityKey = dci.CityAK
-        LEFT JOIN dbo.DimCustomer AS dcu
-            ON fs.CustomerKey = dcu.CustomerAK
-        LEFT JOIN dbo.DimCustomer AS dbtc
-            ON fs.BillToCustomerKey = dbtc.CustomerAK
-        LEFT JOIN dbo.DimStockItem AS dsi
-            ON fs.StockItemKey = dsi.StockItemAK
-        LEFT JOIN dbo.DimEmployee de
-            ON fs.SalespersonKey = de.EmployeeAK
-        LEFT JOIN dbo.FactSale AS f
-            ON fs.WWIInvoiceID = f.InvoiceID
-            AND dsi.StockItemSK = f.StockItemSK
-            AND fs.InvoiceDateKey = f.InvoiceDateKey
-        WHERE
-            f.SaleKey IS NULL
-            
-    END
-    GO
+    The United States is commonly referred to as "USA", "US", and "United States of America". Always use "United States".
     ```
 
-    ![](../assets/images/04_stored_procedure_create.png)
+    ![](../assets/images/04_data_source_instructions_01.png)
 
-1. Validate the stored procedures were created by running the cell for **Step 4.1.5** in *The Workshop* notebook and comparing the results to those below.
-
-    ``` sql
-    SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE'
-    ```
-
-    ![](../assets/images/04_stored_procedure_create_validate.png)
-
-
-1. If you prefer to validate using the **Explorer**, refresh the warehouse object list by selecting the ellipsis (**...**) that appears when hovering the mouse of the warehouse name *WideWorldImportersDW*, then select **Refresh**.
-
-    ![](../assets/images/04_explorer_refresh.png)
-
-1. In the **Explorer**, expand **WideWorldImportersDW -> Schemas -> dbo -> Stored Procedures** to validate that all the procedures were created successfully. Do note that it can take up to **15 minutes** for the notebook Explorer to display the procedures even though they are in the database as seen in step 5 above.
-
-    - CreateUnknownMembers
-    - UpdateDimCity
-    - UpdateDimCustomer
-    - UpdateDimEmployee
-    - UpdateDimStockItem
-    - UpdateFactSale
-
-    ![](../assets/images/04_explorer_stored_procedures.png)
-
-<h3 id = "4.2">4.2 - Incrementally updating tables</h3>
-
-Before beginning, open *The Workshop* notebook, navigate to **Lab 4 - Data transformation using T-SQL**, and locate the **4.2 - Incrementally updating tables** section.
-
-1. Execute all the stored procedures created in the previous section by running the cell for **Step 4.2.1** in *The Workshop* notebook. 
-
-    *Note: More detail about what this code does and exploration of the results are provided in the next step.*
-
-    ``` sql
-    DECLARE @CountBeforeLoadDimCity      BIGINT = (SELECT COUNT_BIG(*) FROM dbo.DimCity)
-    DECLARE @CountBeforeLoadDimCustomer  BIGINT = (SELECT COUNT_BIG(*) FROM dbo.DimCustomer)
-    DECLARE @CountBeforeLoadDimEmployee  BIGINT = (SELECT COUNT_BIG(*) FROM dbo.DimEmployee)
-    DECLARE @CountBeforeLoadDimStockItem BIGINT = (SELECT COUNT_BIG(*) FROM dbo.DimStockItem)
-    DECLARE @CountBeforeLoadFactSale     BIGINT = (SELECT COUNT_BIG(*) FROM dbo.FactSale)
-
-    EXEC dbo.CreateUnknownMembers;
-    EXEC dbo.UpdateDimCity;
-    EXEC dbo.UpdateDimCustomer;
-    EXEC dbo.UpdateDimEmployee;
-    EXEC dbo.UpdateDimStockItem;
-    EXEC dbo.UpdateFactSale;
-
-    SELECT 'dbo'   AS SchemaName, 'DimCity'        AS TableName, FORMAT(@CountBeforeLoadDimCity,      'N0') AS RecordCount_BeforeLoad, FORMAT(COUNT_BIG(*), 'N0') AS RecordCount_AfterLoad FROM dbo.DimCity         UNION ALL
-    SELECT 'dbo'   AS SchemaName, 'DimCustomer'    AS TableName, FORMAT(@CountBeforeLoadDimCustomer,  'N0') AS RecordCount_BeforeLoad, FORMAT(COUNT_BIG(*), 'N0') AS RecordCount_AfterLoad FROM dbo.DimCustomer     UNION ALL
-    SELECT 'dbo'   AS SchemaName, 'DimEmployee'    AS TableName, FORMAT(@CountBeforeLoadDimEmployee,  'N0') AS RecordCount_BeforeLoad, FORMAT(COUNT_BIG(*), 'N0') AS RecordCount_AfterLoad FROM dbo.DimEmployee     UNION ALL
-    SELECT 'dbo'   AS SchemaName, 'DimStockItem'   AS TableName, FORMAT(@CountBeforeLoadDimStockItem, 'N0') AS RecordCount_BeforeLoad, FORMAT(COUNT_BIG(*), 'N0') AS RecordCount_AfterLoad FROM dbo.DimStockItem    UNION ALL
-    SELECT 'dbo'   AS SchemaName, 'FactSale'       AS TableName, FORMAT(@CountBeforeLoadFactSale,     'N0') AS RecordCount_BeforeLoad, FORMAT(COUNT_BIG(*), 'N0') AS RecordCount_AfterLoad FROM dbo.FactSale
+1. Perform the following steps to add an exmple query to help the agent learn patterns about the sales data:
+    - In the **Explorer**, select **Setup**.
+    - Under the **Sales** warehouse, select **Example queries**.
+    - Select **+ Add** from across the top of the example queries pane. 
+    - In the **Question** box, enter: **Show the percentage change in sales by CountryRegion and product by year and month.**
+    - In the **SQL query** box, enter the following code:
+    ```sql
+    SELECT
+        CountryRegionName,
+        ProductCategory,
+        CalendarYear,
+        SalesAmount,
+        PreviousSalesAmount,
+        CASE WHEN PreviousSalesAmount = 0 THEN NULL ELSE (SalesAmount - PreviousSalesAmount) / PreviousSalesAmount * 100 END AS PercentChange
+    FROM (
+        SELECT
+            c.CountryRegionName,
+            p.ProductCategory,
+            d.CalendarYear,
+            SUM(s.SalesAmount) AS SalesAmount,
+            LAG(SUM(s.SalesAmount), 1,0) OVER (ORDER BY c.CountryRegionName, d.CalendarYear) AS PreviousSalesAmount
+        FROM FactSales s
+        FULL OUTER JOIN DimCustomer c ON s.CustomerKey = c.CustomerKey
+        FULL OUTER JOIN DimDate d ON s.OrderDateKey = d.DateKey
+        FULL OUTER JOIN DimProduct p ON s.ProductKey = p.ProductKey
+        GROUP BY
+            d.CalendarYear,
+            p.ProductCategory,
+            c.CountryRegionName
+    ) SalesByRegionYear
     ORDER BY
-        SchemaName,
-        TableName
+        CountryRegionName,
+        ProductCategory,
+        CalendarYear
+    ```
+    - Click anywhere outside the SQL query box and the query will be validated. Invalid queries will be ignored by the agent. 
+
+    ![](../assets/images/04_data_source_example_queries_01.png)
+
+### 4.4 - Interacting with the data agent
+
+1. In the **Test the agent's responses** pane, select **Clear chat**.
+
+    ![](../assets/images/04_clear_chat_fullscreen.png)
+
+1. On the **Clear chat?** dialog, select **Clear chat**.
+
+    ![](../assets/images/04_clear_chat_confirm.png)
+
+1. In the **Test the agent's responses** pane, enter the question **What kinds of influencers were there on sales by year?** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_influencers_01.png)
+
+1. Investigate the output by performing the following actions:
+    - Read the response and look for any potential problems.
+    - Select **1 step completed** to expand the step list. 
+    - Select the **arrow** on the right side of the step to expand the step detail.
+    - Notice the query uses LEFT JOINs, but it should be using an INNER JOIN.
+
+    ![](../assets/images/04_test_influencers_01_step_detail.png)
+
+1. In the **Sales examples** tab, correct the **SQL query** with the code below.
+    
+    *Note: If the **Sales examples** tab is no longer open it can be found by navigating to the **Explorer** -> **Setup** -> **Sales** -> **Example queries**.*
+
+    ```sql
+    SELECT
+        CountryRegionName,
+        ProductCategory,
+        CalendarYear,
+        SalesAmount,
+        PreviousSalesAmount,
+        CASE WHEN PreviousSalesAmount = 0 THEN NULL ELSE (SalesAmount - PreviousSalesAmount) / PreviousSalesAmount * 100 END AS PercentChange
+    FROM (
+        SELECT
+            c.CountryRegionName,
+            p.ProductCategory,
+            d.CalendarYear,
+            SUM(s.SalesAmount) AS SalesAmount,
+            LAG(SUM(s.SalesAmount), 1,0) OVER (ORDER BY c.CountryRegionName, d.CalendarYear) AS PreviousSalesAmount
+        FROM FactSales s
+        INNER JOIN DimCustomer c ON s.CustomerKey = c.CustomerKey
+        INNER JOIN DimDate d ON s.OrderDateKey = d.DateKey
+        INNER JOIN DimProduct p ON s.ProductKey = p.ProductKey
+        GROUP BY
+            d.CalendarYear,
+            p.ProductCategory,
+            c.CountryRegionName
+    ) SalesByRegionYear
+    ORDER BY
+        CountryRegionName,
+        ProductCategory,
+        CalendarYear
     ```
 
-1. Upon completion, compare the results with those in the screenshot and table below. The code in the executed cell performed several steps:
+1. In the **Test the agent's responses** pane, select **Clear chat**.
 
-    1. Store the record count for each of the dimensional model tables before any data is transformed from stage -> dimensional model.
-    1. Run all the five stored procedures to load the dimensional model tables (one procedure per table).
-    1. Display the record count from before the data load and after the data load to ensure data was properly loaded.
+    ![](../assets/images/04_clear_chat_small.png)
 
-    The *RecordCount_AfterLoad* numbers should match those of the stage table record counts produced after running the COPY INTO commands at the end of *Lab 3 - Loading data* indicating all the data was loaded from stage into the dimensional model.
+1. On the **Clear chat?** dialog, select **Clear chat**.
 
-    ![](../assets/images/04_incremental_load_results.png)
+1. In the **Test the agent's responses** pane, enter the question **What kinds of influencers were there on sales by year?** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_influencers_01.png)
+
+1. Investigate the output by performing the following actions:
+    - Read the response and look for any potential problems.
+    - Select **1 step completed** to expand the step list. 
+    - Select the **arrow** on the right side of the step to expand the step detail.
+    - Notice the query now uses INNER JOINs.
+
+    ![](../assets/images/04_test_influencers_02_step_detail.png)
+
+1. In the **Test the agent's responses** pane, enter the question **What are the trends for customers and sales by year?** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_customers_by_year.png)
+
+1. In the response, notice the customer count increases year over year, but there is a drop in sales in 2012. Let's investigate this drop further. 
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_customers_by_year_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Show the percentage change in sales by country from 2011 to 2012.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_percent_change.png)
+
+1. In the response, notice that Canada has the largest decrease from 2011 to 2012. Down about 46% year over year. Let's ask one final question to investigate the customer changes from 2011 to 2012.
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_percent_change_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **How did customer demographic change in Canada between 2011 and 2012 impact sales?** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_customer_demographics.png)
+
+1. In the response, notice the demographics remained relatively constant from 2011 through 2012 suggesting other factors influenced the 46% decline in sales. Next, let's turn to the product side.
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_customer_demographics_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Analyze the data to identify changes in average spend and product category mix.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_product_mix.png)
+
+1. In the response, we will see there was a significant drop in average spend per customer but no real change in the types of items being purchased with 99.97% of sales being bikes in 2012 vs 100% in 2012.
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_customer_demographics_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Were there fewer total bikes purchased or was the average sales amount lower? Provide the average sales amount and total number purchased by subcategory of bikes.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_total_vs_average.png)
+
+1. In the response, we see there was an increase in road bike purchases but with a lower average purchase price. Meanwhile, road bikes declined in both quantity and average sales amount. 
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_total_vs_average_response.png)
+
+### 4.5 Advanced agent instructions
+
+1. From the **Home** tab of the ribbon, select **Agent instructions**.
+
+    ![](../assets/images/04_open_agent_instructions.png)
+
+1. In the **Agent instructions** add the following markdown to help the agent perform several steps each time a question is asked about customer analysis then click anywhere outside the text box to apply the changes:
+
+    ```markdown
+    ## Customer Analysis
+    When asking for a **customer analysis** or to **analyze customer purchase habits** or to **explore customer purchase patterns** use the ```Sales``` warehouse to summarize the average number of sales per customer per year, the average purchase amount per customer per year, and the ProductSubcategoryName that has the highest number of sales. Then use the CustomerAlternateKey to provide the name of the customer with the highest total purchase amount. Finally, provide the most recent SalesOrderNumber from that customer.
+    ```
+
+    ![](../assets/images/04_agent_instructions_02.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Analyze customer purchase habits for the USA.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_usa.png)
+
+1. Investigate the output by performing the following actions:
+
+    - Read the response and notice it returns all the information that was added to the *Agent instructions* earlier in this section.
+    - Select **1 step completed** to expand the step list.
+    - Select the **arrow** on the right side of the step to expand the step detail.
+    - Notice the query uses **United States** even though the question entered said **USA**. This indicates the data source instructions entered at the beginning of this module to replace US and USA references with United States are working as expected.
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_usa_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Analyze customer purchase habits for Canada.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_canada.png)
+
+1. In the response, we see the same output format from the United States data but with the context of Canada applied. Make note of the most recent sales order from Isabella Bryant: SO61151. 
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_canada_response.png)
+
+1. In the **Test the agent's responses** pane, enter the question **Perform a marketing analysis for the order SO61151.** in the **chat box** then select **Send**.
+
+    ![](../assets/images/04_test_marketing_analysis.png)
+
+1. Investigate the output by performing the following actions:
+
+    - Read the response and notice the driving factor behind this purchase was price.
+    - Select **1 step completed** to expand the step list.
+    - Select the **arrow** on the right side of the step to expand the step detail.
+    - Notice the agent automatically switched data sources and is now using the **MarketResearch** lakehouse for this query as it was told to do in the *Agent instructions* earlier in this section.
+
+    *Note: Your output may look different than the screenshot.*
+
+    ![](../assets/images/04_test_marketing_analysis_response.png)
+
+### 4.6 Publishing the data agent
+
+1. From the **Home** tab of the ribbon, select **Publish**.
+
+    ![](../assets/images/04_publish_button.png)
+
+1. On the **Publish data agent** dialog box, select **Publish**.
+
+    ![](../assets/images/04_publish_agent.png)
+
+1. Upon completion, a notification will display indicating the agent was published successfully. 
+
+    ![](../assets/images/04_publish_successful.png)
 
 ## Next steps
-In this lab, you created several stored procedures that will be used to load data from the stage tables (medallion bronze layer) into the dimensional model (medallion silver layer). These procedures used a method for incremental loading where by existing records were updated if a key match was found and inserted if a key match was not found. You also created a surrogate key for each row inserted.
+In this lab, you created a data agent that used multiple data sources. Along the way you configured agent instructions, data source instructions, and example queries to influence the behavior of the agent. You also investigated the queries the agent was running to validate behavior and make modifications to the instructions and example queries to improve responses. 
 
-After creating the procedures you ran them to seed the initial dataset into the dimensional model. Next, you will see how to operationalize the data load and validate that the incremental loading logic works properly on subsequent runs. 
+Using the agent, we were able to quickly perform analysis to get some important details about our sales data:
 
-- Continue to [Lab 5 - Orchestrating warehouse operations](<05 - Orchestrating warehouse operations.md>)
-- Return to the [workshop homepage](<../README.md>)
+- The total number of customers making purchases increased every year. 
+- Despite the increase in customers, 2012 stood out due to a decline in sales. 
+- The decline in sales was driven largely by Cananda followed by the United States. 
+- Customer demographics stayed largely the same from 2011 to 2012. 
+- There was almost no change in the quantity of bikes purchased from 2011 to 2012 (170 vs. 159). 
+- The average amount per bike purchase dropped significantly in both road and mountain bikes indicating a shift in buy habits. 
+- An analysis of the purchasing habits of the customer base in each country returned multiple pieces of information in a consistent format. 
+- We were able to take any purchase and the agent will automatically switch to the marketing data source to help analyze the driving factor behind a purchase. 
+
+- Select **Next** to continue to **Lab 5 - Visualizing data with Power BI**
+- Select **Previous** to return to **Lab 3 - Dimensional Modeling with Data Warehouse**
 
 ## Additional Resources
-- [Surrogate keys](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-load-tables#surrogate-keys)
-- [SCD type 1, 2, and 3](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-load-tables#scd-type-1)
-- [Date dimension](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-load-tables#date-dimension)
-- [Process fact tables](https://learn.microsoft.com/en-us/fabric/data-warehouse/dimensional-modeling-load-tables#process-fact-tables)
+- [Configure Fabric data agent tenant settings](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-tenant-settings)
+- [Create a Fabric data agent](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent)
+- [Fabric data agent example](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-end-to-end-tutorial)
+- [Configure your data agent](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-configurations)
+- [Consume a Fabric Data Agent in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-microsoft-copilot-studio)

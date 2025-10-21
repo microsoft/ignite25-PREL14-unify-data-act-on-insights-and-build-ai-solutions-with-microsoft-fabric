@@ -9,7 +9,7 @@ The following items have been pre-provisioned for you:
 - A virtual machine where all the lab work will be completed.
 - A local login for the virtual machine. 
 - An Entra ID account for use with Microsoft Azure and Microsoft Fabric.
-- An F2 Fabric Capacity.
+- An F4 Fabric Capacity.
 
 This lab will not require you to download or upload any datasets and will not require the use of any client tools like VS Code or Power BI Desktop although many activities which will be performed in the web browser can be done using client tools.
 
