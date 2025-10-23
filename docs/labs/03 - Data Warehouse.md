@@ -28,7 +28,7 @@ This lab will cover:
 
     ![](../assets/images/03_new_item_list_warehouse.png)
 
-1. On the **New warehouse** dialog box, enter the name **Sales** and select **Create**. 
+1. On the **New warehouse** dialog box, enter the name **++Sales++** and select **Create**. 
 
     ![](../assets/images/03_new_warehouse.png)
 
@@ -43,8 +43,8 @@ This lab will cover:
     ![](../assets/images/03_new_notebook.png)
 
 1. From the **Home** tab of the ribbon, select the **gear** icon (Settings) to open the notebook settings. On the **About** page, perform the following actions:
-    - Change the **Name** to **Build Dimensional Model**.
-    - Optionally, add a **Description** such as **Notebook handling all data engineering related tasks for the internet sales data warehouse.**.
+    - Change the **Name** to **++Build Dimensional Model++**.
+    - Optionally, add a **Description** such as **++Notebook handling all data engineering related tasks for the internet sales data warehouse.++**.
     - Select the **X** in the top right corner of the notebook settings to return to the notebook editor.
 
     ![](../assets/images/03_notebook_settings.png)
@@ -204,103 +204,103 @@ This lab will cover:
 
         CREATE TABLE [dbo].[DimCustomer]
             (
-                [CustomerKey]           [int] NOT NULL,
-                [CustomerID]            [varchar](15) NOT NULL,
-                [FirstName]             [varchar](50) NULL,
-                [MiddleName]            [varchar](50) NULL,
-                [LastName]              [varchar](50) NULL,
-                [BirthDate]             [date] NULL,
-                [MaritalStatus]         [char](1) NULL,
-                [Gender]                [varchar](1) NULL,
-                [EmailAddress]          [varchar](50) NULL,
-                [YearlyIncome]          [decimal](38,18) NULL,
-                [TotalChildren]         [smallint] NULL,
-                [NumberChildrenAtHome]  [smallint] NULL,
-                [Education]             [varchar](40) NULL,
-                [Occupation]            [varchar](100) NULL,
-                [HouseOwnerFlag]        [char](1) NULL,
-                [NumberCarsOwned]       [smallint] NULL,
-                [AddressLine1]          [varchar](120) NULL,
-                [AddressLine2]          [varchar](120) NULL,
-                [City]                  [varchar](120) NULL,
-                [StateProvinceName]     [varchar](120) NULL,
-                [CountryRegionName]     [varchar](120) NULL,
-                [Phone]                 [varchar](20) NULL,
-                [DateFirstPurchase]     [date] NULL,
-                [CommuteDistance]       [varchar](15) NULL
+                [CustomerKey]           [int]             NOT NULL,
+                [CustomerID]            [varchar](15)     NOT NULL,
+                [FirstName]             [varchar](50)     NULL,
+                [MiddleName]            [varchar](50)     NULL,
+                [LastName]              [varchar](50)     NULL,
+                [BirthDate]             [date]            NULL,
+                [MaritalStatus]         [char](1)         NULL,
+                [Gender]                [varchar](1)      NULL,
+                [EmailAddress]          [varchar](50)     NULL,
+                [YearlyIncome]          [decimal](38,18)  NULL,
+                [TotalChildren]         [smallint]        NULL,
+                [NumberChildrenAtHome]  [smallint]        NULL,
+                [Education]             [varchar](40)     NULL,
+                [Occupation]            [varchar](100)    NULL,
+                [HouseOwnerFlag]        [char](1)         NULL,
+                [NumberCarsOwned]       [smallint]        NULL,
+                [AddressLine1]          [varchar](120)    NULL,
+                [AddressLine2]          [varchar](120)    NULL,
+                [City]                  [varchar](120)    NULL,
+                [StateProvinceName]     [varchar](120)    NULL,
+                [CountryRegionName]     [varchar](120)    NULL,
+                [Phone]                 [varchar](20)     NULL,
+                [DateFirstPurchase]     [date]            NULL,
+                [CommuteDistance]       [varchar](15)     NULL
             )
         GO
 
         CREATE TABLE [dbo].[DimDate]
             (
-                [DateKey]               [int] NOT NULL,
-                [FullDate]              [date] NOT NULL,
-                [DayNumberOfWeek]       [smallint] NOT NULL,
-                [DayNameOfWeek]         [varchar](10) NOT NULL,
-                [DayNumberOfMonth]      [smallint] NOT NULL,
-                [DayNumberOfYear]       [smallint] NOT NULL,
-                [WeekNumberOfYear]      [smallint] NOT NULL,
-                [MonthName]             [varchar](10) NOT NULL,
-                [MonthNumberOfYear]     [smallint] NOT NULL,
-                [CalendarQuarter]       [smallint] NOT NULL,
-                [CalendarYear]          [smallint] NOT NULL,
-                [CalendarSemester]      [smallint] NOT NULL,
-                [FiscalQuarter]         [smallint] NOT NULL,
-                [FiscalYear]            [smallint] NOT NULL,
-                [FiscalSemester]        [smallint] NOT NULL
+                [DateKey]               [int]             NOT NULL,
+                [FullDate]              [date]            NOT NULL,
+                [DayNumberOfWeek]       [smallint]        NOT NULL,
+                [DayNameOfWeek]         [varchar](10)     NOT NULL,
+                [DayNumberOfMonth]      [smallint]        NOT NULL,
+                [DayNumberOfYear]       [smallint]        NOT NULL,
+                [WeekNumberOfYear]      [smallint]        NOT NULL,
+                [MonthName]             [varchar](10)     NOT NULL,
+                [MonthNumberOfYear]     [smallint]        NOT NULL,
+                [CalendarQuarter]       [smallint]        NOT NULL,
+                [CalendarYear]          [smallint]        NOT NULL,
+                [CalendarSemester]      [smallint]        NOT NULL,
+                [FiscalQuarter]         [smallint]        NOT NULL,
+                [FiscalYear]            [smallint]        NOT NULL,
+                [FiscalSemester]        [smallint]        NOT NULL
             )
         GO
 
         CREATE TABLE [dbo].[DimProduct]
             (
-                [ProductKey]            [int] NULL,
-                [ProductID]             [varchar](25) NULL,
-                [ProductSubcategory]    [varchar](50) NULL,
-                [ProductCategory]       [varchar](50) NULL,
-                [WeightUnitMeasureCode] [char](3) NULL,
-                [SizeUnitMeasureCode]   [char](3) NULL,
-                [ProductName]           [varchar](50) NULL,
-                [StandardCost]          [decimal](38,18) NULL,
-                [FinishedGoodsFlag]     [bit] NOT NULL,
-                [Color]                 [varchar](15) NOT NULL,
-                [SafetyStockLevel]      [smallint] NULL,
-                [ReorderPoint]          [smallint] NULL,
-                [ListPrice]             [decimal](38,18) NULL,
-                [Size]                  [varchar](50) NULL,
-                [SizeRange]             [varchar](50) NULL,
-                [Weight]                [float] NULL,
-                [DaysToManufacture]     [int] NULL,
-                [ProductLine]           [char](2) NULL,
-                [DealerPrice]           [decimal](38,18) NULL,
-                [Class]                 [char](2) NULL,
-                [Style]                 [char](2) NULL,
-                [ModelName]             [varchar](50) NULL,
-                [Description]           [varchar](400) NULL
+                [ProductKey]            [int]             NULL,
+                [ProductID]             [varchar](25)     NULL,
+                [ProductSubcategory]    [varchar](50)     NULL,
+                [ProductCategory]       [varchar](50)     NULL,
+                [WeightUnitMeasureCode] [char](3)         NULL,
+                [SizeUnitMeasureCode]   [char](3)         NULL,
+                [ProductName]           [varchar](50)     NULL,
+                [StandardCost]          [decimal](38,18)  NULL,
+                [FinishedGoodsFlag]     [bit]             NOT NULL,
+                [Color]                 [varchar](15)     NOT NULL,
+                [SafetyStockLevel]      [smallint]        NULL,
+                [ReorderPoint]          [smallint]        NULL,
+                [ListPrice]             [decimal](38,18)  NULL,
+                [Size]                  [varchar](50)     NULL,
+                [SizeRange]             [varchar](50)     NULL,
+                [Weight]                [float]           NULL,
+                [DaysToManufacture]     [int]             NULL,
+                [ProductLine]           [char](2)         NULL,
+                [DealerPrice]           [decimal](38,18)  NULL,
+                [Class]                 [char](2)         NULL,
+                [Style]                 [char](2)         NULL,
+                [ModelName]             [varchar](50)     NULL,
+                [Description]           [varchar](400)    NULL
             )
         GO
 
         CREATE TABLE [dbo].[FactSales]
             (
-                [SalesKey]              [int] NOT NULL,
-                [ProductKey]            [int] NOT NULL,
-                [OrderDateKey]          [int] NOT NULL,
-                [DueDateKey]            [int] NOT NULL,
-                [ShipDateKey]           [int] NOT NULL,
-                [CustomerKey]           [int] NOT NULL,
-                [SalesOrderNumber]      [varchar](20) NOT NULL,
-                [SalesOrderLineNumber]  [smallint] NOT NULL,
-                [OrderQuantity]         [smallint] NOT NULL,
-                [UnitPrice]             [decimal](38,18) NOT NULL,
-                [ExtendedAmount]        [decimal](38,18) NOT NULL,
-                [UnitPriceDiscountPct]  [float] NOT NULL,
-                [DiscountAmount]        [float] NOT NULL,
-                [ProductStandardCost]   [decimal](38,18) NOT NULL,
-                [TotalProductCost]      [decimal](38,18) NOT NULL,
-                [SalesAmount]           [decimal](38,18) NOT NULL,
-                [TaxAmt]                [decimal](38,18) NOT NULL,
-                [Freight]               [decimal](38,18) NOT NULL,
-                [CarrierTrackingNumber] [varchar](25) NULL,
-                [CustomerPONumber]      [varchar](25) NULL
+                [SalesKey]              [int]             NOT NULL,
+                [ProductKey]            [int]             NOT NULL,
+                [OrderDateKey]          [int]             NOT NULL,
+                [DueDateKey]            [int]             NOT NULL,
+                [ShipDateKey]           [int]             NOT NULL,
+                [CustomerKey]           [int]             NOT NULL,
+                [SalesOrderNumber]      [varchar](20)     NOT NULL,
+                [SalesOrderLineNumber]  [smallint]        NOT NULL,
+                [OrderQuantity]         [smallint]        NOT NULL,
+                [UnitPrice]             [decimal](38,18)  NOT NULL,
+                [ExtendedAmount]        [decimal](38,18)  NOT NULL,
+                [UnitPriceDiscountPct]  [float]           NOT NULL,
+                [DiscountAmount]        [float]           NOT NULL,
+                [ProductStandardCost]   [decimal](38,18)  NOT NULL,
+                [TotalProductCost]      [decimal](38,18)  NOT NULL,
+                [SalesAmount]           [decimal](38,18)  NOT NULL,
+                [TaxAmt]                [decimal](38,18)  NOT NULL,
+                [Freight]               [decimal](38,18)  NOT NULL,
+                [CarrierTrackingNumber] [varchar](25)     NULL,
+                [CustomerPONumber]      [varchar](25)     NULL
             )
         GO
         ```
@@ -350,38 +350,38 @@ This lab will cover:
         -- DimCustomer
         UPDATE destination
         SET 
-            destination.CustomerID = source.CustomerID, 
-            destination.FirstName = source.FirstName, 
-            destination.MiddleName = source.MiddleName, 
-            destination.LastName = source.LastName, 
-            destination.BirthDate = source.BirthDate, 
-            destination.MaritalStatus = source.MaritalStatus, 
-            destination.Gender = source.Gender, 
-            destination.EmailAddress = source.EmailAddress, 
-            destination.YearlyIncome = source.YearlyIncome, 
-            destination.TotalChildren = source.TotalChildren, 
-            destination.NumberChildrenAtHome = source.NumberChildrenAtHome, 
-            destination.Education = source.Education, 
-            destination.Occupation = source.Occupation, 
-            destination.HouseOwnerFlag = source.HouseOwnerFlag, 
-            destination.NumberCarsOwned = source.NumberCarsOwned, 
-            destination.AddressLine1 = source.AddressLine1, 
-            destination.AddressLine2 = source.AddressLine2, 
-            destination.City = source.City, 
-            destination.StateProvinceName = source.StateProvinceName, 
-            destination.CountryRegionName = source.CountryRegionName, 
-            destination.Phone = source.Phone, 
-            destination.DateFirstPurchase = source.DateFirstPurchase, 
-            destination.CommuteDistance = source.CommuteDistance
+            destination.CustomerID              = source.CustomerID, 
+            destination.FirstName               = source.FirstName, 
+            destination.MiddleName              = source.MiddleName, 
+            destination.LastName                = source.LastName, 
+            destination.BirthDate               = source.BirthDate, 
+            destination.MaritalStatus           = source.MaritalStatus, 
+            destination.Gender                  = source.Gender, 
+            destination.EmailAddress            = source.EmailAddress, 
+            destination.YearlyIncome            = source.YearlyIncome, 
+            destination.TotalChildren           = source.TotalChildren, 
+            destination.NumberChildrenAtHome    = source.NumberChildrenAtHome, 
+            destination.Education               = source.Education, 
+            destination.Occupation              = source.Occupation, 
+            destination.HouseOwnerFlag          = source.HouseOwnerFlag, 
+            destination.NumberCarsOwned         = source.NumberCarsOwned, 
+            destination.AddressLine1            = source.AddressLine1, 
+            destination.AddressLine2            = source.AddressLine2, 
+            destination.City                    = source.City, 
+            destination.StateProvinceName       = source.StateProvinceName, 
+            destination.CountryRegionName       = source.CountryRegionName, 
+            destination.Phone                   = source.Phone, 
+            destination.DateFirstPurchase       = source.DateFirstPurchase, 
+            destination.CommuteDistance         = source.CommuteDistance
         FROM dbo.DimCustomer AS destination
         INNER JOIN stage.Customer AS source
-            ON destination.[CustomerID] = source.[CustomerID]
+            ON destination.CustomerID = source.CustomerID
 
         DECLARE @MaxID INT = (SELECT ISNULL(MAX(CustomerKey), 0) FROM dbo.DimCustomer)
 
         INSERT INTO dbo.DimCustomer
         SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [CustomerKey],
+            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS CustomerKey,
             CustomerID,
             FirstName,
             MiddleName,
@@ -412,37 +412,37 @@ This lab will cover:
         -- DimProduct
         UPDATE destination
         SET 
-            destination.ProductID = source.ProductID, 
-            destination.ProductSubcategory = source.ProductSubcategory, 
-            destination.ProductCategory = source.ProductCategory, 
-            destination.WeightUnitMeasureCode = source.WeightUnitMeasureCode, 
-            destination.SizeUnitMeasureCode = source.SizeUnitMeasureCode, 
-            destination.ProductName = source.ProductName, 
-            destination.StandardCost = source.StandardCost, 
-            destination.FinishedGoodsFlag = source.FinishedGoodsFlag, 
-            destination.Color = source.Color, 
-            destination.SafetyStockLevel = source.SafetyStockLevel, 
-            destination.ReorderPoint = source.ReorderPoint, 
-            destination.ListPrice = source.ListPrice, 
-            destination.Size = source.Size, 
-            destination.SizeRange = source.SizeRange, 
-            destination.Weight = source.Weight, 
-            destination.DaysToManufacture = source.DaysToManufacture, 
-            destination.ProductLine = source.ProductLine, 
-            destination.DealerPrice = source.DealerPrice, 
-            destination.Class = source.Class, 
-            destination.Style = source.Style, 
-            destination.ModelName = source.ModelName, 
-            destination.Description = source.Description
+            destination.ProductID               = source.ProductID, 
+            destination.ProductSubcategory      = source.ProductSubcategory, 
+            destination.ProductCategory         = source.ProductCategory, 
+            destination.WeightUnitMeasureCode   = source.WeightUnitMeasureCode, 
+            destination.SizeUnitMeasureCode     = source.SizeUnitMeasureCode, 
+            destination.ProductName             = source.ProductName, 
+            destination.StandardCost            = source.StandardCost, 
+            destination.FinishedGoodsFlag       = source.FinishedGoodsFlag, 
+            destination.Color                   = source.Color, 
+            destination.SafetyStockLevel        = source.SafetyStockLevel, 
+            destination.ReorderPoint            = source.ReorderPoint, 
+            destination.ListPrice               = source.ListPrice, 
+            destination.Size                    = source.Size, 
+            destination.SizeRange               = source.SizeRange, 
+            destination.Weight                  = source.Weight, 
+            destination.DaysToManufacture       = source.DaysToManufacture, 
+            destination.ProductLine             = source.ProductLine, 
+            destination.DealerPrice             = source.DealerPrice, 
+            destination.Class                   = source.Class, 
+            destination.Style                   = source.Style, 
+            destination.ModelName               = source.ModelName, 
+            destination.Description             = source.Description
         FROM dbo.DimProduct AS destination
         INNER JOIN stage.Product AS source
-            ON destination.[ProductID] = source.[ProductID]
+            ON destination.ProductID = source.ProductID
 
         DECLARE @MaxID INT = (SELECT ISNULL(MAX(ProductKey), 0) FROM dbo.DimProduct)
 
         INSERT INTO dbo.DimProduct
         SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [ProductKey],
+            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS ProductKey,
             ProductID,
             ProductSubcategory,
             ProductCategory,
@@ -474,7 +474,7 @@ This lab will cover:
 
         INSERT INTO dbo.FactSales
         SELECT
-            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS [SalesKey],
+            @MaxID + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS SalesKey,
             dp.[ProductKey],
             dod.[DateKey] AS [OrderDateKey],
             ddd.[DateKey] AS [DueDateKey],

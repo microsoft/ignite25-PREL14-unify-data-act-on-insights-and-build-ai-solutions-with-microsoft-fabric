@@ -28,7 +28,7 @@ This lab will cover:
 
     ![](../assets/images/02_new_item_list_lakehouse.png)
 
-1. On the **New Lakehouse** dialog box, enter the name **MarketResearch** and select **Create**. 
+1. On the **New Lakehouse** dialog box, enter the name **++MarketResearch++** and select **Create**. 
 
     ![](../assets/images/02_new_lakehouse.png)
 
@@ -43,20 +43,22 @@ This lab will cover:
     ![](../assets/images/02_new_notebook.png)
 
 1. From the **Home** tab of the ribbon, select the **gear** icon (Settings) to open the notebook settings. On the **About** page, perform the following actions:
-    - Change the **Name** to **Prepare Market Research**.
-    - Optionally, add a **Description** such as **Notebook handling all data engineering related tasks for the internet sales market research analysis.**.
+    - Change the **Name** to **++Prepare Market Research++**.
+    - Optionally, add a **Description** such as **++Notebook handling all data engineering related tasks for the internet sales market research analysis.++**.
     - Select the **X** in the top right corner of the notebook settings to return to the notebook editor.
 
     ![](../assets/images/02_notebook_settings.png)
 
 1. The *Reasons.parquet* file contains a list of options for what may have influenced a customer's decision to make a purchase. The *SalesReason.parquet* file contains a record for each line item purchased and the ID for the corresponding reason that influenced the purchase. Read each file into a dataframe and preview the data by performing the following actions:
     - Replace the text in the first notebook cell with the following code:
+        
         ```python
         df_salesreason = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/SalesReason.parquet")
         df_reasons = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/Reasons.parquet")
         df_salesreason.show()
         df_reasons.show()
         ```
+        
     - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the first code cell in focus to run the code.
     - Review both datasets.
 

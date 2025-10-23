@@ -9,13 +9,13 @@ This lab will cover:
 
 ### 1.1 - Logging into Microsoft Fabric
 
-1. Open your web browser and navigate to +++https://fabric.microsoft.com+++.
+1. Open your web browser and navigate to ++https://fabric.microsoft.com++.
 
-1. In the **Email** box, enter **+++@lab.CloudPortalCredential(User1).Username+++**. Select **Submit**.
+1. In the **Email** box, enter **++@lab.CloudPortalCredential(User1).Username++**. Select **Submit**.
 
     ![](../assets/images/01_fabric_login_email.png)
 
-1. On the **Enter Temporary Access Pass** dialog, enter **+++@lab.CloudPortalCredential(User1).TAP+++**. Select **Sign in**.
+1. On the **Enter Temporary Access Pass** dialog, enter **++@lab.CloudPortalCredential(User1).TAP++**. Select **Sign in**.
 
     ![](../assets/images/01_fabric_login_tap.png)
 
@@ -34,7 +34,7 @@ This lab will cover:
 
     ![](../assets/images/01_navigation_bar_new_workspace.png)
 
-1. In the **Create a workspace** pane, in the **Name** box, enter **+++@lab.CloudResourceTemplate(FabricPerUserPOCv3).Parameters[capacityName]+++** (the trailing numbers should be unique to each lab user). Select **Apply** to create and open the new workspace.
+1. In the **Create a workspace** pane, in the **Name** box, enter **++@lab.CloudResourceTemplate(FabricPerUserPOCv3).Parameters[capacityName]++** (the trailing numbers should be unique to each lab user). Select **Apply** to create and open the new workspace.
 
     ![](../assets/images/01_workspace_name.png)
 

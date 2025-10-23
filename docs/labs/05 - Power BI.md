@@ -37,7 +37,7 @@ This lab will cover:
 
 1. On the **Choose tables from OneLake** page perform the following actions:
 
-    - In the box with the text **Enter a semantic model name**, enter **Sales and Marketing**.
+    - In the box with the text **Enter a semantic model name**, enter **++Sales and Marketing++**.
     - Check the box next to **dbo** to automatically select all the tables in the schema:
         - DimCustomer
         - DimDate
@@ -134,9 +134,7 @@ This lab will cover:
 
     ![](../assets/images/05_copilot.png)
 
-1. In the text box at the bottom of the Copilot pane, enter the following text then select **Send**:
-
-    Create a new report that visualizes customer demographics and country region data. Focus on Total Sales, Total Sales Last Year, and OrderQuantity.
+1. In the text box at the bottom of the Copilot pane, enter the text **++Create a new report that visualizes customer demographics and country region data. Focus on Total Sales, Total Sales Last Year, and OrderQuantity.++** then select **Send**.
 
     ![](../assets/images/05_copilot_create_report.png)
 
@@ -148,7 +146,7 @@ This lab will cover:
 
     ![](../assets/images/05_save_report.png)
 
-1. On the **Save your report** page enter the report name **Customer Demographics and Country Region Analysis** and select **Save**.
+1. On the **Save your report** page enter the report name **++Customer Demographics and Country Region Analysis++** and select **Save**.
 
     ![](../assets/images/05_save_report_name.png)
 

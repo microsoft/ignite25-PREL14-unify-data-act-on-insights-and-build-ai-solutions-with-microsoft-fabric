@@ -31,7 +31,7 @@ This lab will cover:
 
     ![](../assets/images/04_new_item_list_data_agent.png)
 
-1. On the **Create data agent** dialog box, enter the name **Sales Analysis Agent** and select **Create**. 
+1. On the **Create data agent** dialog box, enter the name **++Sales Analysis Agent++** and select **Create**. 
 
     ![](../assets/images/04_new_data_agent.png)
 
@@ -102,8 +102,9 @@ This lab will cover:
     - In the **Explorer**, select **Setup**.
     - Under the **Sales** warehouse, select **Example queries**.
     - Select **+ Add** from across the top of the example queries pane. 
-    - In the **Question** box, enter: **Show the percentage change in sales by CountryRegion and product by year and month.**
+    - In the **Question** box, enter: **++Show the percentage change in sales by CountryRegion and product by year and month.++**
     - In the **SQL query** box, enter the following code:
+
     ```sql
     SELECT
         CountryRegionName,
@@ -133,6 +134,7 @@ This lab will cover:
         ProductCategory,
         CalendarYear
     ```
+
     - Click anywhere outside the SQL query box and the query will be validated. Invalid queries will be ignored by the agent. 
 
     ![](../assets/images/04_data_source_example_queries_01.png)
@@ -147,7 +149,7 @@ This lab will cover:
 
     ![](../assets/images/04_clear_chat_confirm.png)
 
-1. In the **Test the agent's responses** pane, enter the question **What kinds of influencers were there on sales by year?** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++What kinds of influencers were there on sales by year?++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_influencers_01.png)
 
@@ -199,7 +201,7 @@ This lab will cover:
 
 1. On the **Clear chat?** dialog, select **Clear chat**.
 
-1. In the **Test the agent's responses** pane, enter the question **What kinds of influencers were there on sales by year?** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++What kinds of influencers were there on sales by year?++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_influencers_01.png)
 
@@ -211,7 +213,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_influencers_02_step_detail.png)
 
-1. In the **Test the agent's responses** pane, enter the question **What are the trends for customers and sales by year?** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++What are the trends for customers and sales by year?++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_customers_by_year.png)
 
@@ -221,7 +223,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_customers_by_year_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Show the percentage change in sales by country from 2011 to 2012.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Show the percentage change in sales by country from 2011 to 2012.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_percent_change.png)
 
@@ -231,7 +233,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_percent_change_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **How did customer demographic change in Canada between 2011 and 2012 impact sales?** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++How did customer demographic change in Canada between 2011 and 2012 impact sales?++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_customer_demographics.png)
 
@@ -241,7 +243,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_customer_demographics_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Analyze the data to identify changes in average spend and product category mix.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Analyze the data to identify changes in average spend and product category mix.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_product_mix.png)
 
@@ -251,7 +253,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_customer_demographics_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Were there fewer total bikes purchased or was the average sales amount lower? Provide the average sales amount and total number purchased by subcategory of bikes.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Were there fewer total bikes purchased or was the average sales amount lower? Provide the average sales amount and total number purchased by subcategory of bikes.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_total_vs_average.png)
 
@@ -276,7 +278,7 @@ This lab will cover:
 
     ![](../assets/images/04_agent_instructions_02.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Analyze customer purchase habits for the USA.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Analyze customer purchase habits for the USA.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_usa.png)
 
@@ -291,7 +293,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_usa_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Analyze customer purchase habits for Canada.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Analyze customer purchase habits for Canada.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_canada.png)
 
@@ -301,7 +303,7 @@ This lab will cover:
 
     ![](../assets/images/04_test_canada_response.png)
 
-1. In the **Test the agent's responses** pane, enter the question **Perform a marketing analysis for the order SO61151.** in the **chat box** then select **Send**.
+1. In the **Test the agent's responses** pane, enter the question **++Perform a marketing analysis for the order SO61151.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_marketing_analysis.png)
 
