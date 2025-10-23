@@ -19,15 +19,21 @@
 
 
 # Project information .........................................
-site_name: "Session Title"
+site_name: "Unified Analytics with Microsoft Fabric"
 site_url: 
-site_author: Content Creator
+site_author: Bradley Schacht and John Hoang
 site_description: >-
-  Demo mkdocs for Ignite Repos
+  Join us for a focused, half-day technical lab where you'll experience Microsoft Fabric in action—end to end. Start in OneLake and explore how a single copy of data streamlines governance and eliminates duplication. Through guided, role-based labs, you'll:
+    Create an architecture to enable a generative AI solution in Fabric
+    Ingest, transform, and enrich data using a variety of methods
+    Use Copilot to develop data solutions faster
+    Build a conversational Q&A system with Fabric data agents
+    Visualize data using Power BI
+  Whether you're a data engineer, BI analyst, or data scientist, you'll leave having built a complete, governed data-to-insight workflow—demonstrating how Microsoft Fabric unifies tools, teams, and innovation in a single afternoon
 
 # Repository ..................................................
-repo_name: microsoft/Ignite25-Repo-Template
-repo_url: https://github.com/microsoft/Ignite25-Repo-Template
+repo_name: microsoft/Ignite25-PREL14-Unified-Analytics-with-Microsoft-Fabric
+repo_url: https://github.com/microsoft/ignite25-PREL14-unify-data-act-on-insights-and-build-ai-solutions-with-microsoft-fabric
 
 # Copyright ...................................................
 copyright: >
