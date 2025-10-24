@@ -172,9 +172,9 @@ This lab will cover:
 1. In the blank code cell perform the following actions:
     - Enter the code below:
         ```sql
-        COPY INTO [stage].[Customer]    FROM 'https://scbradlstorage01.blob.core.windows.net/sampledata/Ignite/Customer.parquet'    WITH (FILE_TYPE = 'PARQUET');
-        COPY INTO [stage].[Product]     FROM 'https://scbradlstorage01.blob.core.windows.net/sampledata/Ignite/Product.parquet'     WITH (FILE_TYPE = 'PARQUET');
-        COPY INTO [stage].[Sales]       FROM 'https://scbradlstorage01.blob.core.windows.net/sampledata/Ignite/Sales.parquet'       WITH (FILE_TYPE = 'PARQUET');
+        COPY INTO [stage].[Customer]    FROM 'https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/Customer.parquet'    WITH (FILE_TYPE = 'PARQUET');
+        COPY INTO [stage].[Product]     FROM 'https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/Product.parquet'     WITH (FILE_TYPE = 'PARQUET');
+        COPY INTO [stage].[Sales]       FROM 'https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/Sales.parquet'       WITH (FILE_TYPE = 'PARQUET');
         GO
         ```
 
@@ -330,7 +330,7 @@ This lab will cover:
 1. In the blank code cell perform the following actions:
     - Enter the code below:
         ```sql
-        COPY INTO [dbo].[DimDate] FROM 'https://scbradlstorage01.blob.core.windows.net/sampledata/Ignite/Date.parquet' WITH (FILE_TYPE = 'PARQUET');
+        COPY INTO [dbo].[DimDate] FROM 'https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/Date.parquet' WITH (FILE_TYPE = 'PARQUET');
         GO
         ```
 

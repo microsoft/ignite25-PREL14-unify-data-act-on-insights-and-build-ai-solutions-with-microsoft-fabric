@@ -53,8 +53,8 @@ This lab will cover:
     - Replace the text in the first notebook cell with the following code:
         
         ```python
-        df_salesreason = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/SalesReason.parquet")
-        df_reasons = spark.read.parquet("abfss://sampledata@scbradlstorage01.dfs.core.windows.net/Ignite/Reasons.parquet")
+        df_salesreason = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/SalesReason.parquet")
+        df_reasons = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/Reasons.parquet")
         df_salesreason.show()
         df_reasons.show()
         ```
