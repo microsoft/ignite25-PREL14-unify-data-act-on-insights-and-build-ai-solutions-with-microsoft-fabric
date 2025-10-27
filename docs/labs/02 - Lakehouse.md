@@ -53,8 +53,27 @@ This lab will cover:
     - Replace the text in the first notebook cell with the following code:
         
         ```python
-        df_salesreason = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/SalesReason.parquet")
-        df_reasons = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/Reasons.parquet")
+        import requests
+        import io
+        import pandas as pd
+
+        # Step 1: Download the Parquet files as bytes into memory
+        salesreason_response = requests.get("https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/SalesReason.parquet")
+        reasons_response = requests.get("https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/Reasons.parquet")
+
+        # Step 2: Load the bytes into Pandas DataFrames (in-memory)
+        salesreason_pd = pd.read_parquet(io.BytesIO(salesreason_response.content))
+        reasons_pd = pd.read_parquet(io.BytesIO(reasons_response.content))
+
+        # Step 3: Convert Pandas → Spark DataFrames
+        df_salesreason = spark.createDataFrame(salesreason_pd)
+        df_reasons = spark.createDataFrame(reasons_pd)
+
+        # If the files are already accessible in the lakehouse storage or an ADLS Gen2 account, you can read them directly using Spark as below.
+        # df_salesreason = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/SalesReason.parquet")
+        # df_reasons = spark.read.parquet("abfss://sampledata@igniteanalyticspreday.dfs.core.windows.net/Ignite/Reasons.parquet")
+
+        # Step 4: Show the DataFrames
         df_salesreason.show()
         df_reasons.show()
         ```
