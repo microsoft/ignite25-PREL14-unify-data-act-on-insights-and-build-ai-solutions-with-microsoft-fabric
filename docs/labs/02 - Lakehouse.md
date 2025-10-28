@@ -83,7 +83,7 @@ This lab will cover:
 
     ![](../assets/images/02_run_cell_01.png)
 
-1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
     ![](../assets/images/02_new_cell.png)
 
@@ -102,14 +102,13 @@ This lab will cover:
 
     ![](../assets/images/02_dataframe_joined.png)
 
-1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell:
     - Enter the code below which writes the dataframe to a Delta table.
 
         ```python
-        df_marketinganalysis = df_salesreason.join(df_reasons, "SalesReasonID", "leftouter").drop("SalesReasonID")
-        df_marketinganalysis.show()
+        df_marketinganalysis.write.format("Delta").saveAsTable("MarketingAnalysis")
         ```
 
     - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
@@ -121,7 +120,7 @@ This lab will cover:
 
     ![](../assets/images/02_delta_table_created.png)
 
-1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll past the dataframe output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell:
     - Enter the code below which uses Spark SQL to read from the Delta table created in a previous step.
@@ -163,7 +162,7 @@ This lab will cover:
 
     ![](../assets/images/02_explorer_sql_endpoint_table.png)
 
-1. In the notebook, scroll past the Spark SQL output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. Notice this time, the cell language is **T-SQL**. 
+1. In the notebook, scroll past the Spark SQL output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. Notice this time, the cell language is **T-SQL**. 
 
     ![](../assets/images/02_new_cell_tsql.png)
 

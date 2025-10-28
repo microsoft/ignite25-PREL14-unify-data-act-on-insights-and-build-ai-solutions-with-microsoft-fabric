@@ -165,7 +165,7 @@ This lab will cover:
 
     ![](../assets/images/03_stage_tables_created.png)
 
-1. Scroll past the output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll past the output to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
     ![](../assets/images/03_new_cell.png)
 
@@ -190,7 +190,7 @@ This lab will cover:
 
 ### 3.3 - Transforming data and creating a dimensional model
 
-1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell perform the following actions:
     - Enter the code:
@@ -325,7 +325,7 @@ This lab will cover:
 
     ![](../assets/images/03_dbo_tables_created.png)
 
-1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell perform the following actions:
     - Enter the code below:
@@ -342,7 +342,7 @@ This lab will cover:
 
     ![](../assets/images/03_dbo_dimdate_load_output.png)
 
-1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell perform the following actions:
     - Enter the code below:
@@ -533,7 +533,7 @@ This lab will cover:
     - **dbo.DimProduct** (Inserts): 0
     - **dbo.FactSales** (Inserts): 0
 
-1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Cell* and *+ Markdown*. Select **+ Cell** to add a new code cell to the notebook. 
+1. Scroll to the bottom of the notebook. Hover the mouse just below the bottom of the cell output. Two options will appear: *+ Code* and *+ Markdown*. Select **+ Code** to add a new code cell to the notebook. 
 
 1. In the blank code cell perform the following actions:
     - Enter the code below:
