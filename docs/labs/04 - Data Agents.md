@@ -98,7 +98,7 @@ This lab will cover:
 
     ![](../assets/images/04_data_source_instructions_01.png)
 
-1. Perform the following steps to add an exmple query to help the agent learn patterns about the sales data:
+1. Perform the following steps to add an example query to help the agent learn patterns about the sales data:
     - In the **Explorer**, select **Setup**.
     - Under the **Sales** warehouse, select **Example queries**.
     - Select **+ Add** from across the top of the example queries pane. 
@@ -141,7 +141,7 @@ This lab will cover:
 
 ### 4.4 - Interacting with the data agent
 
-1. In the **Test the agent's responses** pane, select **Clear chat**.
+1. In the **Test the agent's responses** pane, select **Clear chat** (Broom icon).
 
     ![](../assets/images/04_clear_chat_fullscreen.png)
 
@@ -195,7 +195,7 @@ This lab will cover:
         CalendarYear
     ```
 
-1. In the **Test the agent's responses** pane, select **Clear chat**.
+1. In the **Test the agent's responses** pane, select **Clear chat** (Broom icon).
 
     ![](../assets/images/04_clear_chat_small.png)
 
