@@ -54,6 +54,8 @@ For more information, setup instructions for other dev clients, and to post comm
 | What is Microsoft Fabric? | [https://aka.ms/WhatIsMicrosoftFabric](https://aka.ms/WhatIsMicrosoftFabric) | Overview of Microsoft Fabric |
 | Get started with Microsoft Fabric | [https://aka.ms/MicrosoftFabric](https://aka.ms/MicrosoftFabric)| Microsoft Fabric Learning Path |
 | Learn at Ignite | [https://aka.ms/LearnAtIgnite](https://aka.ms/LearnAtIgnite?ocid=ignite25_nextsteps_github_cnl) | Continue learning on Microsoft Learn |
+| Discord | [https://aka.ms/AIFoundryDiscord-Ignite25](https://aka.ms/AIFoundryDiscord-Ignite25) | Join the AI Foundry Discord Community |
+| GitHub Discussions | [https://aka.ms/AIFoundryForum-Ignite25](https://aka.ms/AIFoundryForum-Ignite25) | Ask questions and share ideas |
 | Reddit | [https://reddit.com/r/MicrosoftFabric](https://reddit.com/r/MicrosoftFabric)| Microsoft Fabric Reddit Community |
 
 ## Content Owners
