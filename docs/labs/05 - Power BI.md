@@ -69,9 +69,9 @@ This lab will cover:
 1. On the **Manage relationships** page select **New relationship** and perform the following actions:
 
     - On the **From table** dropdown, select **FactSales**.
-    - On the **To table** dropdown, select **DimCustomer**.
-    - Ensure the **CustomerKey** field on the **FactSales** preview grid is selected (the column will be a darker gray than the rest).
-    - Ensure the **CustomerKey** field on the **DimCustomer** preview grid is selected (the column will be a darker gray than the rest).
+    - On the **To table** dropdown, select **DimProduct**.
+    - Ensure the **ProductKey** field on the **FactSales** preview grid is selected (the column will be a darker gray than the rest).
+    - Ensure the **ProductKey** field on the **DimProduct** preview grid is selected (the column will be a darker gray than the rest).
     - Ensure the **Cardinality** is set to **Many to one (*:1)**.
     - Select **Save**.
 
@@ -100,7 +100,7 @@ This lab will cover:
 
     ![](../assets/images/05_new_measure.png)
 
-1. In the formula bar enter the following DAX calculation then select **Commit** (the green check mark) to the left of the formuala (or press Enter on the keyboard):
+1. In the formula bar enter the following DAX calculation then select **Commit** (the green check mark) to the left of the formula (or press Enter on the keyboard):
 
     ```
     Total Sales = CALCULATE(SUM('FactSales'[SalesAmount]))
@@ -112,7 +112,7 @@ This lab will cover:
 
     ![](../assets/images/05_new_measure.png)
 
-1. In the formula bar enter the following DAX calculation then select **Commit** (the green check mark) to the left of the formuala (or press Enter on the keyboard):
+1. In the formula bar enter the following DAX calculation then select **Commit** (the green check mark) to the left of the formula (or press Enter on the keyboard):
 
     ```
     Total Sales Last Year = VAR LY = LASTNONBLANK(DimDate[CalendarYear], 1)-1
@@ -124,7 +124,7 @@ This lab will cover:
 
     ![](../assets/images/05_total_sales_last_year_calculation.png)
 
-### 5.1 - Building a report with Copilot
+### 5.2 - Building a report with Copilot
 
 1. From the ribbon select **File**. On the menu select **Create new report**. A new tab will open with a blank report canvas. 
 

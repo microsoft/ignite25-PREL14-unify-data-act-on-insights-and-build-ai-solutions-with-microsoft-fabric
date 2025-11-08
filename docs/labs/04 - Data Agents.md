@@ -7,7 +7,7 @@ Before you begin:
 This lab will cover:
 
 - Creating a data agent
-- Addiing data sources to a data agent
+- Adding data sources to a data agent
 - Configuring the data agent
 - Interacting with the data agent
 - Advanced agent instructions
@@ -39,7 +39,7 @@ This lab will cover:
 
     ![](../assets/images/04_new_data_agent_landing_page.png)
 
-### 4.2 - Addiing data sources to a data agent
+### 4.2 - Adding data sources to a data agent
 
 1. In the **Explorer**, select **+ Data source** to add a new data source to the agent. 
 
@@ -157,7 +157,7 @@ This lab will cover:
     - Read the response and look for any potential problems.
     - Select **1 step completed** to expand the step list. 
     - Select the **arrow** on the right side of the step to expand the step detail.
-    - Notice the query uses LEFT JOINs, but it should be using an INNER JOIN.
+    - Notice the query uses FULL OUTER JOINs, but it should be using an INNER JOIN.
 
     ![](../assets/images/04_test_influencers_01_step_detail.png)
 
@@ -245,6 +245,8 @@ This lab will cover:
 
 1. In the **Test the agent's responses** pane, enter the question **++Analyze the data to identify changes in average spend and product category mix.++** in the **chat box** then select **Send**.
 
+    *Note: Your output may look different than the screenshot.*
+    
     ![](../assets/images/04_test_product_mix.png)
 
 1. In the response, we will see there was a significant drop in average spend per customer but no real change in the types of items being purchased with 99.97% of sales being bikes in 2012 vs 100% in 2012.

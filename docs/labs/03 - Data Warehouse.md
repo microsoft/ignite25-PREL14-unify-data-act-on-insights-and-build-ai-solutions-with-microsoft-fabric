@@ -147,6 +147,8 @@ This lab will cover:
     ![](../assets/images/03_create_stage.png)
 
 1. In the **Explorer**, perform the following actions:
+
+    ***Note:*** *It can take several minutes for new objects to show up in the object explorer even though they have been created. If the tables do not show up after selecting refresh in the steps below, wait 2 minutes and try again. This step is NOT required to continue and complete the rest of the lab.*
     
     - Select the ellipsis (**...**) next to **Sales**. From the menu, select **Refresh**.
 

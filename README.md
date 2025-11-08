@@ -4,7 +4,7 @@
 
 # [Microsoft Ignite 2025](https://ignite.microsoft.com)
 
-## PREL14: Unified Analytics with Microsoft Fabric
+## PREL14: Unify data, act on insights, and build AI solutions with Microsoft Fabric
 
 [![Microsoft Fabric Reddit Community](https://img.shields.io/badge/Reddit-Microsoft%20Fabric%20Reddit%20Community-%23FF4500?logo=reddit)](https://www.reddit.com/r/MicrosoftFabric/)
 
