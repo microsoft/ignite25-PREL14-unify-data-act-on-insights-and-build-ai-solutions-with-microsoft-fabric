@@ -25,6 +25,8 @@ This lab will cover:
 
 1. Dismiss the **Welcome to the Fabric view** tour by selecting **Cancel**.
 
+    ![](../assets/images/01_welcome_to_the_fabric_view.png)
+
 
 ### 1.2 - Creating a workspace
 
@@ -38,10 +40,12 @@ This lab will cover:
 
     ![](../assets/images/01_workspace_name.png)
 
-1. Dismiss the **Introducing task flows (preview)** dialog by selecting **Got it**.
+1. Dismiss the **Introducing task flows** dialog by selecting **Got it**.
+    
+    ![](../assets/images/01_introducing_task_flows.png)
 
 ## Next steps
-In this lab you configured your environment which includes a workspace and a capacity. This is the foundational infrastructure for the remaining labs. You are now ready to get started learning how to unify data, act on insights, and build AI solutions on Microsoft Fabric!
+In this lab you configured your environment which includes a workspace and a capacity. This is the foundational infrastructure for the remaining labs. You are now ready to get started learning how to unify data, act on insights, and build AI solutions with Microsoft Fabric!
 
 - Select **Next** to continue to **Lab 2 - Lakehouses and Data Engineering with Spark**
 - Select **Previous** to return to the **Introduction**

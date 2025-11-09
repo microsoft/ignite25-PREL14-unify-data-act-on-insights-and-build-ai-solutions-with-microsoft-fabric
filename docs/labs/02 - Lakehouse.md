@@ -42,6 +42,10 @@ This lab will cover:
 
     ![](../assets/images/02_new_notebook.png)
 
+1. Dismiss the **Enahnce your notebook experience with AI tools** dialog by selecting **Skip tour**.
+
+    ![](../assets/images/02_enhance_your_notebook_experience_with_ai_tools.png)
+
 1. From the **Home** tab of the ribbon, select the **gear** icon (Settings) to open the notebook settings. On the **About** page, perform the following actions:
     - Change the **Name** to **++Prepare Market Research++**.
     - Optionally, add a **Description** such as **++Notebook handling all data engineering related tasks for the internet sales market research analysis.++**.

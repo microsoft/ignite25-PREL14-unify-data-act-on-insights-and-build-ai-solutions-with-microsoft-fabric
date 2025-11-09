@@ -44,11 +44,11 @@ When the virtual machine login screen appears, it should be ready to accept the 
 
 1. Press **Enter** on the keyboard or click on the right arrow to login.
 
-![](../assets/images/00_windows_login.png)
+    ![](../assets/images/00_windows_login.png)
 
-1. On the **You're almost done setting up your PC** screen, select **Remind me in 3 days**.
+1. On the **You're almost done setting up your PC** screen, select **Remind me later**.
 
-![](../assets/images/00_windows_initial_setup.png)
+    ![](../assets/images/00_windows_initial_setup.png)
 
 ## Next steps
 In this lab you familiarized yourself with the Skillable lab environment, explored the various logins that will be used throughout the labs, and logged into your virtual machine for the first time.
