@@ -16,6 +16,11 @@ Today you created an end-to-end analytics solution in Microsoft Fabric which inc
 - Semantic model 
 - Power BI report 
 
+## Feedback
+Your feedback is very useful for us and helps us improve our labs for future events. Please visit [aka.ms/ignite25-feedback](https://aka.ms/ignite25-feedback) to fill out the evaluation for this lab and other Ignite 2025 sessions. 
+
+![](https://assetsmanagement952e.blob.core.windows.net/ignite25assets/feedbackslides/PREL14-repo.png)
+
 ## Next steps
 This may be where our workshop ends today, but it is not the end of the analytics journey. Beyond what we covered is a world full of data integration, OneLake capabilities, security, data science with Spark, operational databases, and real-time intelligence use cases waiting to bring more value to your business. We would encourage you to check out the rest of what Microsoft Fabric has to offer!
 
