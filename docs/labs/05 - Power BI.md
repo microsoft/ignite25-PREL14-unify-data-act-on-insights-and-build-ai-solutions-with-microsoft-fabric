@@ -96,7 +96,7 @@ This lab will cover:
 
     ![](../assets/images/05_data_pane_select_factsales.png)
 
-1. From the **Home** tab of the ribbon, select **New measure** from the Calculations group.
+1. From the **Home** tab of the ribbon, select **New measure** from the *Calculations* group.
 
     ![](../assets/images/05_new_measure.png)
 
@@ -108,7 +108,7 @@ This lab will cover:
 
     ![](../assets/images/05_total_sales_calculation.png)
 
-1. From the **Home** tab of the ribbon, select **New measure** from the Calculations group.
+1. From the **Home** tab of the ribbon, select **New measure** from the *Calculations* group.
 
     ![](../assets/images/05_new_measure.png)
 
@@ -133,6 +133,10 @@ This lab will cover:
 1. From the ribbon select **Copilot**. A Copilot pane will open on the far right side of the page.
 
     ![](../assets/images/05_copilot.png)
+
+1. On the Copilot pane, select **Get started** to dismiss the welcome message. 
+
+    ![](../assets/images/05_copilot_get_started.png)
 
 1. In the text box at the bottom of the Copilot pane, enter the text **++Create a new report that visualizes customer demographics and country region data. Focus on Total Sales, Total Sales Last Year, and OrderQuantity.++** then select **Send**.
 

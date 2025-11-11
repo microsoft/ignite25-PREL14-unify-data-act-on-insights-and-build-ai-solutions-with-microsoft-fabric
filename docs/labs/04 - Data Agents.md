@@ -141,7 +141,7 @@ This lab will cover:
 
 ### 4.4 - Interacting with the data agent
 
-1. In the **Test the agent's responses** pane, select **Clear chat** (Broom icon).
+1. In the **Test the agent's responses** pane, select the **Broom** icon (Clear chat).
 
     ![](../assets/images/04_clear_chat_fullscreen.png)
 
@@ -195,7 +195,7 @@ This lab will cover:
         CalendarYear
     ```
 
-1. In the **Test the agent's responses** pane, select **Clear chat** (Broom icon).
+1. In the **Test the agent's responses** pane, select the **Broom** icon (Clear chat).
 
     ![](../assets/images/04_clear_chat_small.png)
 
@@ -249,17 +249,17 @@ This lab will cover:
     
     ![](../assets/images/04_test_product_mix.png)
 
-1. In the response, we will see there was a significant drop in average spend per customer but no real change in the types of items being purchased with 99.97% of sales being bikes in 2012 vs 100% in 2012.
+1. In the response, we will see there was a significant drop in average spend per customer but no real change in the types of items being purchased with more than 99.9% of sales being bikes in 2012 vs 100% in 2012.
 
     *Note: Your output may look different than the screenshot.*
 
-    ![](../assets/images/04_test_customer_demographics_response.png)
+    ![](../assets/images/04_test_product_mix_response.png)
 
 1. In the **Test the agent's responses** pane, enter the question **++Were there fewer total bikes purchased or was the average sales amount lower? Provide the average sales amount and total number purchased by subcategory of bikes.++** in the **chat box** then select **Send**.
 
     ![](../assets/images/04_test_total_vs_average.png)
 
-1. In the response, we see there was an increase in road bike purchases but with a lower average purchase price. Meanwhile, road bikes declined in both quantity and average sales amount. 
+1. In the response, we see there was an increase in mountain bike purchases but with a lower average purchase price. Meanwhile, road bikes declined in both quantity and average sales amount. 
 
     *Note: Your output may look different than the screenshot.*
 

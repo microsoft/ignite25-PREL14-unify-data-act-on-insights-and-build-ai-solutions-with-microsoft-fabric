@@ -182,7 +182,7 @@ This lab will cover:
 
     - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
 
-    - There will be no results for this query, only a collapsed messages output. Expand the output and verify the record counts by selecting the **down arrow** next to the word **Messages** below the code cell.
+    - There will be no results for this query, only a collapsed messages output. Expand the output and verify the record counts by selecting the **arrow** next to the word **Messages** below the code cell.
 
         - **stage.Customer**: 18,484 
         - **stage.Product**: 504
@@ -313,6 +313,8 @@ This lab will cover:
 
 1. In the **Explorer**, perform the following actions:
 
+    ***Note:*** *It can take several minutes for new objects to show up in the object explorer even though they have been created. If the tables do not show up after selecting refresh in the steps below, wait 2 minutes and try again. This step is NOT required to continue and complete the rest of the lab.*
+
     - Expand the object tree to **Sales** -> **Schemas** -> **dbo** -> **Tables**.
 
     - Select the ellipsis (**...**) next to **Tables**. From the menu, select **Refresh**.
@@ -338,7 +340,7 @@ This lab will cover:
 
     - Select the **Play** button (Run cell) or press **CRTL + ENTER** with the cell in focus to run the code.
 
-    - There will be no results for this query, only a collapsed messages output. Expand the output and verify the record count by selecting the **down arrow** next to the word **Messages** below the code cell.
+    - There will be no results for this query, only a collapsed messages output. Expand the output and verify the record count by selecting the **arrow** next to the word **Messages** below the code cell.
 
         - **dbo.DimDate**: 3,652
 

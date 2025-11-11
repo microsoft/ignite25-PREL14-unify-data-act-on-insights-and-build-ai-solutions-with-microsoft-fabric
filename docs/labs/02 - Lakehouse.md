@@ -120,7 +120,7 @@ This lab will cover:
 
     ![](../assets/images/02_save_as_delta_table.png)
 
-1. In the **Explorer**, expand **MarketResearch** -> **Tables** and select the ellipsis (**...**) next to **dbo**. From the menu, select **Refresh**. Validate that the **marketinganalysis** table appears in the list. 
+1. In the **Explorer**, expand **MarketResearch** and select the  ellipsis (**...**) next to **Tables**. From the menu, select **Refresh**. Validate that the **marketinganalysis** table appears in the list. 
 
     ![](../assets/images/02_delta_table_created.png)
 
@@ -160,9 +160,13 @@ This lab will cover:
 
 1. In the **Explorer**, select the ellipsis (**...**) next to the **MarketResearch** SQL analytics endpoint. From the menu, select **Refresh**.
 
+    ***Note:*** *It can take several minutes for new objects to show up in the object explorer even though they have been created. If the tables in the next step do not show up after selecting refresh, wait 2 minutes and try again. While this step is required to continue and complete the rest of the lab, you do NOT need to complete the rest of this lab to continue to Lab 3 - Dimensional Modeling with Data Warehouse.*
+
     ![](../assets/images/02_refresh_sql_endpoint.png)
 
 1. In the **Explorer**, expand **MarketResearch** -> **Schemas** -> **dbo** -> **Tables** and verify the **marketinganalysis** table exists. 
+
+    ***Note:*** *It can take several minutes for new objects to show up in the object explorer even though they have been created. If the tables do not show up after selecting refresh in the previous step, wait 2 minutes and try the previous step again. While this step is required to continue and complete the rest of the lab, you do NOT need to complete the rest of this lab to continue to Lab 3 - Dimensional Modeling with Data Warehouse.*
 
     ![](../assets/images/02_explorer_sql_endpoint_table.png)
 
