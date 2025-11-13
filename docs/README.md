@@ -53,6 +53,7 @@ For more information, setup instructions for other dev clients, and to post comm
 |:-------------------|:----------------------------------|:-------------------|
 | What is Microsoft Fabric? | [https://aka.ms/WhatIsMicrosoftFabric](https://aka.ms/WhatIsMicrosoftFabric) | Overview of Microsoft Fabric |
 | Get started with Microsoft Fabric | [https://aka.ms/MicrosoftFabric](https://aka.ms/MicrosoftFabric)| Microsoft Fabric Learning Path |
+| Ignite 2025 Next Steps | [https://aka.ms/Ignite25-Next-Steps](https://aka.ms/Ignite25-Next-Steps?ocid=ignite25_nextsteps_cnl) | Links to all repos for Ignite 2025 Sessions |
 | Learn at Ignite | [https://aka.ms/LearnAtIgnite](https://aka.ms/LearnAtIgnite?ocid=ignite25_nextsteps_github_cnl) | Continue learning on Microsoft Learn |
 | Reddit | [https://reddit.com/r/MicrosoftFabric](https://reddit.com/r/MicrosoftFabric)| Microsoft Fabric Reddit Community |
 
