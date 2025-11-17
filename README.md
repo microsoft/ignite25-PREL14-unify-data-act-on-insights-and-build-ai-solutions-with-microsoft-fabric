@@ -8,6 +8,8 @@
 
 [![Microsoft Fabric Reddit Community](https://img.shields.io/badge/Reddit-Microsoft%20Fabric%20Reddit%20Community-%23FF4500?logo=reddit)](https://www.reddit.com/r/MicrosoftFabric/)
 
+Download the session slide [deck here](https://github.com/microsoft/ignite25-PREL14-unify-data-act-on-insights-and-build-ai-solutions-with-microsoft-fabric/blob/88d264432f6a4689d15b5cc477d5d759f7ddef9c/docs/Unify%20data%20act%20on%20insights%20and%20build%20AI%20solutions%20with%20Microsoft%20Fabric.pdf).
+
 ### Session Description
 
 Join us for a focused, half-day technical lab where you'll experience Microsoft Fabric in action—end to end. Start in OneLake and explore how a single copy of data streamlines governance and eliminates duplication.
@@ -32,10 +34,10 @@ By the end of this session, learners will be able to:
 
 ### 💻 Technologies Used
 
-1. Microsoft Fabric Data Engineering
-1. Microsoft Fabric Data Warehouse
-1. Microsoft Fabric Data Science (data agent)
-1. Power BI
+1. [Microsoft Fabric Data Engineering](https://learn.microsoft.com/en-us/fabric/data-engineering/data-engineering-overview)
+1. [Microsoft Fabric Data Warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing)
+1. Microsoft Fabric Data Science ([data agent](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent))
+1. [Power BI](https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview)
 
 ### 🌟 Microsoft Learn MCP Server
 
