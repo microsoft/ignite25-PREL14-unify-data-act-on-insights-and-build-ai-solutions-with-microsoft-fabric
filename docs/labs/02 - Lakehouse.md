@@ -42,7 +42,7 @@ This lab will cover:
 
     ![](../assets/images/02_new_notebook.png)
 
-1. Dismiss the **Enahnce your notebook experience with AI tools** dialog by selecting **Skip tour**.
+1. Dismiss the **Enhance your notebook experience with AI tools** dialog by selecting **Skip tour**.
 
     ![](../assets/images/02_enhance_your_notebook_experience_with_ai_tools.png)
 
@@ -60,6 +60,8 @@ This lab will cover:
         import requests
         import io
         import pandas as pd
+
+        spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", "false")
 
         # Step 1: Download the Parquet files as bytes into memory
         salesreason_response = requests.get("https://igniteanalyticspreday.blob.core.windows.net/sampledata/Ignite/SalesReason.parquet")
